@@ -5,13 +5,13 @@ Welcome to the Enicarthage Social Media project! This project combines the power
 
 ## Table of Contents
 
-1.  [Introduction](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#introduction)
-2.  [Features](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#features)
-3.  [Prerequisites](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#prerequisites)
-4.  [Installation](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#installation)
-5.  [Usage](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#usage)
-6.  [Contributing](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#contributing)
-7.  [License](https://chat.openai.com/c/46ca66a2-bbf8-4f02-bc79-41d8a37cbbd9#license)
+1.  [Introduction](#introduction)
+2.  [Features](#features)
+3.  [Prerequisites](#prerequisites)
+4.  [Installation](#installation)
+5.  [Usage](#usage)
+6.  [Contributing](#contributing)
+7.  [License](#license)
 
 ## Introduction
 
@@ -40,22 +40,22 @@ Before you begin, ensure you have the following installed:
     
     bashCopy code
     
-    `git clone https://github.com/yourusername/enicarthage-social-media.git
-    cd enicarthage-social-media` 
+    `git clone https://github.com/GhaythBenAbid/enicar-social-media.git
+    cd enicar-social-media` 
     
 2.  Frontend (Angular):
     
     bashCopy code
     
-    `cd frontend
-    npm install` 
+    `cd frontend`
+    `npm install` 
     
 3.  Backend (Spring Boot):
     
     bashCopy code
     
-    `cd backend
-    ./mvnw install` 
+    `cd backend`
+    `mvnw.cmd install` 
     
 
 ## Usage
@@ -64,15 +64,15 @@ Before you begin, ensure you have the following installed:
     
     bashCopy code
     
-    `cd backend
-    ./mvnw spring-boot:run` 
+    `cd backend`
+    `mvnw.cmd spring-boot:run` 
     
 2.  Start the Angular frontend:
     
     bashCopy code
     
-    `cd frontend
-    ng serve` 
+    `cd frontend`
+    `ng serve`
     
 
 Visit `http://localhost:4200` in your browser to access the Enicarthage Social Media platform.

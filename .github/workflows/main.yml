@@ -1,0 +1,45 @@
+name: Verify Angular and Spring Boot
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Angular Dependencies
+        run: |
+          cd frontend/
+          npm install
+
+      - name: Build Angular Application
+        run: |
+          cd frontend/
+          npm run build --prod
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Build Spring Boot Application
+        run: |
+          cd backend/
+          ./mvnw clean install
+
+      - name: Run Spring Boot Tests
+        run: |
+          cd backend/
+          ./mvnw test

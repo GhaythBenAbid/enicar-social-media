@@ -1,5 +1,5 @@
 
-# Enicarthage Social Media Project 
+# Enicarthage Social Media Project
 
 Welcome to the Enicarthage Social Media project! This project combines the power of Angular 16 and Spring Boot to create a robust and modern social media platform.
 

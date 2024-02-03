@@ -34,6 +34,11 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
+      - name: Make mvnw Executable
+        run: |
+          cd backend/
+          chmod +x mvnw
+
       - name: Build Spring Boot Application
         run: |
           cd backend/

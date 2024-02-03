@@ -30,7 +30,7 @@ Enicarthage Social Media is a full-stack web application developed using Angular
 Before you begin, ensure you have the following installed:
 
 -   [Node.js](https://nodejs.org/) (for Angular)
--   Angular CLI (install using `npm install -g @angular/cli`)
+-   Angular CLI (install using `npm install -g @angular/cli@16`)
 -   Java Development Kit (JDK) (for Spring Boot)
 -   Spring Boot
 

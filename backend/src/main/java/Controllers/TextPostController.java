@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/TextPost")
+@RequestMapping("/text-post")
 public class TextPostController {
     // Your controller logic goes here
 }

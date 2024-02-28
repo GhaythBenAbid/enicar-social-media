@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class TextPost extends Post {
-
     private String content;
 
 }

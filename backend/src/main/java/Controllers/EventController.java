@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/Event")
+@RequestMapping("/event")
 public class EventController {
     // Your controller logic goes here
 }

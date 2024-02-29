@@ -1,5 +1,6 @@
 package Controllers;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,4 +15,9 @@ public class HomeController {
     public String home() {
         return "ENICAR Social Media Application Backend";
     }
+
+
+
+
+
 }

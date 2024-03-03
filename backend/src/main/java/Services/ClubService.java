@@ -3,52 +3,74 @@ package Services;
 import Models.Club;
 import Models.Content;
 import Repositories.ClubRepository;
+import Repositories.ContentRepository;
+import Repositories.UserRepository;
 import jakarta.persistence.OneToOne;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubService {
     // Your service logic goes here
 
-    private final ClubRepository clubRepo;
+    private final ClubRepository clubRepository;
+    private final ContentRepository contentRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    public ClubService(ClubRepository clubRepo){this.clubRepo = clubRepo ;}
-
-    public String CreateClubInfo(Club club){
-        clubRepo.save(club);
-        return "Club Created Successfully ";
-
-    }
-    public String UpdateClubInfo(Club club){
-        clubRepo.save(club);
-        return "Club Created Successfully ";
+    public ClubService(ClubRepository clubRepository , ContentRepository contentRepository , UserRepository userRepository){
+        this.clubRepository = clubRepository;
+        this.contentRepository = contentRepository;
+        this.userRepository = userRepository;
     }
 
-    public Club getClubInfo(long clubID){
-        return clubRepo.findById(clubID).get();
+    public Club createClub(Club club) {
+        if (club.getContent() != null && club.getContent().getContent_data() != null) {
+            Content content = new Content();
+            content.setContent_data(club.getContent().getContent_data());
+            Content savedContent = contentRepository.save(content);
+            club.setContent(savedContent);
+        }
+
+        if (club.getResponsible() != null) {
+            club.setResponsible(userRepository.findById((long) club.getResponsible().getId()).orElse(null));
+        }
+
+        clubRepository.save(club);
+
+        return club;
+    }
+    public List<Club> getAllClubs() {
+        return this.clubRepository.findAll();
     }
 
-    public String DeleteClubInfo(long clubID){
-        clubRepo.deleteById(clubID);
-        return "Club Deleted Successfully ";
+    public Optional<Club> getClubById(Long id) {
+        return this.clubRepository.findById(id);
     }
 
-    public List<Club> getALLUserInfo(){return clubRepo.findAll();}
+    public Club updateClub(Long id, Club club) {
+        Optional<Club> optionalClub = this.clubRepository.findById(id);
+        if (optionalClub.isPresent()) {
+            Club existingClub = optionalClub.get();
+            existingClub.setName(club.getName());
+            existingClub.setLogo(club.getLogo());
+            existingClub.setBanner(club.getBanner());
+            existingClub.setDescription(club.getDescription());
+            existingClub.setCreationYear(club.getCreationYear());
+            existingClub.setContent(club.getContent());
+            existingClub.setResponsible(club.getResponsible());
+            return this.clubRepository.save(existingClub);
+        } else {
+            throw new IllegalArgumentException("Club not found with id: " + id);
+        }
+    }
 
-    ////////////////////////////////////////////
-    public Club UpdateClubInfo(long clubID , Club club){
-        Club existingClub = clubRepo.findById(clubID).get() ;
-        existingClub.setName(club.getName()) ;
-        existingClub.setLogo(club.getLogo());
-        existingClub.setBanner(club.getBanner());
-        existingClub.setDescription(club.getDescription());
-        existingClub.setCreationYear(club.getCreationYear());
-        existingClub.setContent(club.getContent());
-
-
-        return clubRepo.save(existingClub) ;
+    public void deleteClub(Long id) {
+        this.clubRepository.deleteById(id);
     }
 
 }

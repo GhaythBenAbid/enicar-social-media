@@ -1,5 +1,6 @@
 package Models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,10 @@ public class Club {
     private String description;
     
     private int creationYear;
-    
+
+    @OneToOne
+    private User responsible;
+
     @OneToOne
     private Content content;
 }

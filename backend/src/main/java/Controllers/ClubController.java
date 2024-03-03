@@ -2,52 +2,62 @@ package Controllers;
 
 import Models.Club;
 import Repositories.ClubRepository;
+import Utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import Services.ClubService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/club")
+@RequestMapping("/api/club")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class ClubController {
     @Autowired
     private  ClubService clubService;
 
     @PostMapping
-    public String createClubDetails(@RequestBody Club club){
-        clubService.CreateClubInfo(club);
-        return "Club Created Successfuly" ;
+    public ResponseEntity createClubDetails(@RequestBody Club club){
 
+        try {
+            Club newClub = this.clubService.createClub(club);
+            return new ResponseEntity(newClub, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity(new ApiResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
-
-    @PutMapping
-    public String updateClubDetails(@RequestBody Club club){
-        this.clubService.UpdateClubInfo(club);
-        return "Club Updated Successfully" ;
-    }
-
-    @GetMapping("/{ClubID}")
-    public Club getClubDetails(@PathVariable("ClubID") int ClubID)
-    {
-        return clubService.getClubInfo(ClubID);
-    }
-
     @GetMapping
-    public List<Club> getALLClubDetails(){return this.clubService.getALLUserInfo();}
-
-    @DeleteMapping ("/{clubID}")
-    public String deleteClubDetails(@PathVariable("clubID") int clubID){
-        this.clubService.DeleteClubInfo(clubID);
-        return "Club Deleted Successfully" ;
+    public ResponseEntity<Object> getAllClubs() {
+        List<Club> clubs = clubService.getAllClubs();
+        return new ResponseEntity<>(clubs, HttpStatus.OK);
     }
 
-    @PutMapping("/{clubID}")
-    public String updateClubDetails(@PathVariable("clubID") int clubID,@RequestBody Club club){
-        this.clubService.UpdateClubInfo(clubID,club);
-        return "Club Updated Successfully" ;
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getClubById(@PathVariable("id") Long id) {
+        Club club = clubService.getClubById(id).orElse(null);
+        if (club != null) {
+            return new ResponseEntity<>(club, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND.value(), "Club not found with id: " + id), HttpStatus.NOT_FOUND);
+        }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateClubDetails(@PathVariable("id") Long id, @RequestBody Club club) {
+        try {
+            Club updatedClub = clubService.updateClub(id, club);
+            return new ResponseEntity<>(updatedClub, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteClub(@PathVariable("id") Long id) {
+        clubService.deleteClub(id);
+        return new ResponseEntity<>(new ApiResponse(HttpStatus.OK.value(), "Club deleted successfully"), HttpStatus.OK);
+    }
 
 
 }

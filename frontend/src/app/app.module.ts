@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginComponent } from './login/login.component';
+import { UserAdminComponent } from './user-admin/user-admin.component';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -14,11 +18,15 @@ import { LoginComponent } from './login/login.component';
     HomepageComponent,
     LandingPageComponent,
     ErrorPageComponent,
-    LoginComponent
+    LoginComponent,
+    UserAdminComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

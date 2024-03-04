@@ -4,13 +4,19 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginComponent } from './login/login.component';
+import { UserAdminComponent } from './user-admin/user-admin.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomepageComponent },
+  { path: 'user' , component : UserAdminComponent} ,
+  
   //404 page
-  { path: '**', component: ErrorPageComponent }
+  { path: '**', component: ErrorPageComponent } ,
+  
+  
 ];
 
 @NgModule({

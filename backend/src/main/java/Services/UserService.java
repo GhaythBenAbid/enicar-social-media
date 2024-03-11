@@ -1,15 +1,31 @@
 package Services;
 
+<<<<<<< HEAD
 
 import Models.User;
 import Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+import Models.User;
+import Repositories.UserRepository;
+import Utils.JWTUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> master
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 import java.util.List;
 
 @Service
-public class UserService {
+
+public class UserService implements UserDetailsService {
     // Your service logic goes here
 
 
@@ -46,6 +62,25 @@ public class UserService {
     public List<User> getALLUserInfo(){return userRepo.findAll();}
 
 
+
+
+    @Autowired
+    private UserRepository repository;
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = repository.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + username);
+        }
+
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getEmail())
+                .password(user.getPassword())
+                .roles(user.getRole())
+                .build();
+    }
 
 
 

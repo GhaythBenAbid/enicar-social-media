@@ -1,15 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
-import { LoginComponent } from './login/login.component';
+import { LandingPageComponent } from './Pages/landing-page/landing-page.component';
+import { LoginComponent } from './Pages/login/login.component';
+import { HomepageComponent } from './Pages/homepage/homepage.component';
+import { RegisterComponent } from './Pages/register/register.component';
+import { ListClubComponent } from './Pages/admin/club/list-club/list-club.component';
+import { ErrorPageComponent } from './Pages/error-page/error-page.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomepageComponent },
-  //404 page
+  { path: 'register', component: RegisterComponent},
+
+  //admin group routes
+  {
+    path: 'admin',
+    children: [
+      { path: 'club', component: ListClubComponent }, 
+    ],
+  },
+
+
+
+
   { path: '**', component: ErrorPageComponent }
 ];
 

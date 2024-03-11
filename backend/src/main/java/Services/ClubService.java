@@ -56,18 +56,35 @@ public class ClubService {
         Optional<Club> optionalClub = this.clubRepository.findById(id);
         if (optionalClub.isPresent()) {
             Club existingClub = optionalClub.get();
-            existingClub.setName(club.getName());
-            existingClub.setLogo(club.getLogo());
-            existingClub.setBanner(club.getBanner());
-            existingClub.setDescription(club.getDescription());
-            existingClub.setCreationYear(club.getCreationYear());
-            existingClub.setContent(club.getContent());
-            existingClub.setResponsible(club.getResponsible());
+
+            if (club.getName() != null) {
+                existingClub.setName(club.getName());
+            }
+            if (club.getLogo() != null) {
+                existingClub.setLogo(club.getLogo());
+            }
+            if (club.getBanner() != null) {
+                existingClub.setBanner(club.getBanner());
+            }
+            if (club.getDescription() != null) {
+                existingClub.setDescription(club.getDescription());
+            }
+            if (club.getCreationYear() != 0) {
+                existingClub.setCreationYear(club.getCreationYear());
+            }
+            if (club.getContent() != null) {
+                existingClub.setContent(club.getContent());
+            }
+            if (club.getResponsible() != null) {
+                existingClub.setResponsible(club.getResponsible());
+            }
+
             return this.clubRepository.save(existingClub);
         } else {
             throw new IllegalArgumentException("Club not found with id: " + id);
         }
     }
+
 
     public void deleteClub(Long id) {
         this.clubRepository.deleteById(id);

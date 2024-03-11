@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-login',

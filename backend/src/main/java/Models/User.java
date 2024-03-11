@@ -25,7 +25,7 @@ public class User {
 
     private String password;
 
-    private String type;
+    private String role;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;

@@ -1,11 +1,10 @@
 package Services;
 
-<<<<<<< HEAD
 
 import Models.User;
 import Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-=======
+
 import Models.User;
 import Repositories.UserRepository;
 import Utils.JWTUtils;
@@ -15,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
->>>>>>> master
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +41,7 @@ public class UserService implements UserDetailsService {
         existingUser.setBirthDate(user.getBirthDate()) ;
         existingUser.setEmail(user.getEmail());
         existingUser.setField(user.getField());
-        existingUser.setType(user.getType());
+        existingUser.setRole(user.getRole());
         existingUser.setPassword(user.getPassword());
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());

@@ -33,57 +33,68 @@
                     <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 ">
                         <div>
                             <label class="block mb-2 text-sm text-gray-600">First Name</label>
-                            <input type="text" name="firstName" ngModel
+                            <input type="text" name="firstName" [(ngModel)]="firstName"   
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Enter your first name" required>
                         </div>
                         <div>
                             <label class="block mb-2 text-sm text-gray-600">Last Name</label>
-                            <input type="text" name="lastName" ngModel
+                            <input type="text" name="lastName" [(ngModel)]="lastName"
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Enter your last name" required>
                         </div>
                         <div>
-                            <label class="block mb-2 text-sm text-gray-600">Phone number</label>
-                            <input type="tel" name="phoneNumber" ngModel
+                            <label class="block mb-2 text-sm text-gray-600">Birth Date</label>
+                            <input type="date" name="birthDate" [(ngModel)]="birthDate"
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Enter your phone number" required>
                         </div>
                         <div>
                             <label class="block mb-2 text-sm text-gray-600">Email address</label>
-                            <input type="email" name="email" ngModel
+                            <input type="email" name="email" [(ngModel)]="email" 
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Enter your email address" required>
                         </div>
                         <div>
                             <label class="block mb-2 text-sm text-gray-600">Password</label>
-                            <input type="password" name="password" ngModel
+                            <input type="password" name="password" [(ngModel)]="password"
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Enter your password" required>
                         </div>
                         <div>
                             <label class="block mb-2 text-sm text-gray-600">Confirm password</label>
-                            <input type="password" name="confirmPassword" ngModel
+                            <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword"
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Confirm your password" required>
                         </div>
-                        <div>
-                            <label class="block mb-2 text-sm text-gray-600">Confirm password</label>
-                            <input type="password" name="confirmPassword" ngModel
+                        <div class="col-span-2">
+                            <label class="block mb-2 text-sm text-gray-600">Field</label>
+
+                            <select name="field" [(ngModel)]="field"
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                placeholder="Confirm your password" required>
+                                required>
+                                <option value="1">Computer Science</option>
+                                <option value="2">Electrical Engineering</option>
+                                <option value="3">Mechanical Engineering</option>
+                                <option value="4">Civil Engineering</option>
+                                <option value="5">Industrial Engineering</option>
+                                <option value="6">Telecommunication Engineering</option>
+                                <option value="7">Biomedical Engineering</option>
+                                <option value="8">Chemical Engineering</option>
+                                <option value="9">Petroleum Engineering</option>
+                                <option value="10">Geological Engineering</option>
+                                <option value="11">Mining Engineering</option>
+                                <option value="12">Architecture</option>
+                                <option value="13">Urban Planning</option>
+                                <option value="14">Mathematics</option>
+                                <option value="15">Physics</option>
+                            </select>
+
                         </div>
 
-                        <button type="submit"
-                            class="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                            <span>Sign Up </span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
+                        <button  type="submit"
+                        (click)="register()"
+                        class="col-span-2 flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-blue-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primbg-primary">Register</button>
                     </form>
 
                     <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <a href="#"

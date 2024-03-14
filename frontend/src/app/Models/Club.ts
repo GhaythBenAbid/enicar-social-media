@@ -3,6 +3,7 @@ import { User } from "./User";
 
 // Club.ts
 export interface Club {
+    id: number;
     name: string;
     logo: string;
     banner: string;

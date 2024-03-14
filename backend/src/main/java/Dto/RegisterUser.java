@@ -1,12 +1,11 @@
 package Dto;
 
+import Models.Field;
 import Models.User;
-import jakarta.validation.Constraint;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.Payload;
+import jakarta.validation.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,25 +37,17 @@ public class RegisterUser {
     @NotEmpty(message = "Role is required")
     private String role;
 
+
     private Date birthDate;
 
-
-
-
-    public User toUser() {
-        User user = new User();
-        user.setFirstName(this.firstName);
-        user.setLastName(this.lastName);
-        user.setEmail(this.email);
-        user.setPassword(this.password);
-        user.setRole(this.role);
-        user.setBirthDate(this.birthDate);
-        return user;
-    }
-
+    @NotNull(message = "Field is required")
+    private int fieldId;
 
 
 }
+
+
+
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -79,3 +70,4 @@ class EnicarEmailValidator implements ConstraintValidator<EnicarEmail, String> {
         return email != null && email.endsWith("@enicar.ucar.tn");
     }
 }
+

@@ -26,8 +26,7 @@ export class LoginComponent {
                 window.location.href = '/homepage';
             }, 1000);
         }, (error) => {
-            console.log(error);
-            this.toast.error({detail:"ERROR",summary:error.error,duration:3000});
+            this.toast.error({detail:"ERROR",summary:error.error.errors,duration:3000});
         });
     }
 

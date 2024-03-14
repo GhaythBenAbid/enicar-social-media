@@ -13,6 +13,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { RegisterComponent } from './Pages/register/register.component';
+import { VerifcationComponent } from './Pages/verifcation/verifcation.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegisterComponent } from './Pages/register/register.component';
     LoginComponent,
     ListClubComponent,
     NavbarComponent,
-    RegisterComponent
+    RegisterComponent,
+    VerifcationComponent
   ],
   imports: [
     BrowserModule,

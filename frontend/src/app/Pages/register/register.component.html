@@ -5,8 +5,11 @@
             <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                 <div>
                     <h2 class="text-2xl font-bold text-white sm:text-3xl">
-                        EniCarthage
+                        ENICarthage
                     </h2>
+                    <h3 class="font-dancing text-3xl text-white font-bold">
+                        Social Media
+                    </h3>
 
                     <p class="max-w-xl mt-3 text-gray-300">
                         🎓 Explore Every Corner of Campus Life:
@@ -19,7 +22,7 @@
             </div>
         </div>
 
-        <div class="flex items-center w-full  px-6 mx-auto lg:w-4/6">
+        <div class="flex items-center w-full  px-6 mx-auto lg:w-1/2">
             <div class="flex-1">
                 <div class="text-center">
                     <div class="flex justify-center mx-auto">
@@ -70,24 +73,10 @@
                         <div class="col-span-2">
                             <label class="block mb-2 text-sm text-gray-600">Field</label>
 
-                            <select name="field" [(ngModel)]="field"
+                            <select name="field" [(ngModel)]="selectedField"
                                 class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 required>
-                                <option value="1">Computer Science</option>
-                                <option value="2">Electrical Engineering</option>
-                                <option value="3">Mechanical Engineering</option>
-                                <option value="4">Civil Engineering</option>
-                                <option value="5">Industrial Engineering</option>
-                                <option value="6">Telecommunication Engineering</option>
-                                <option value="7">Biomedical Engineering</option>
-                                <option value="8">Chemical Engineering</option>
-                                <option value="9">Petroleum Engineering</option>
-                                <option value="10">Geological Engineering</option>
-                                <option value="11">Mining Engineering</option>
-                                <option value="12">Architecture</option>
-                                <option value="13">Urban Planning</option>
-                                <option value="14">Mathematics</option>
-                                <option value="15">Physics</option>
+                                <option *ngFor="let field of fields" [value]="field.id">{{field.name}}</option>
                             </select>
 
                         </div>
@@ -97,8 +86,9 @@
                         class="col-span-2 flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-blue-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primbg-primary">Register</button>
                     </form>
 
-                    <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <a href="#"
-                            class="text-blue-500 focus:outline-none focus:underline hover:underline">Sign up</a>.</p>
+                    <div class="mt-8 text-center">
+                        <p class="text-sm text-gray-600">Already have an account? <a [routerLink]="['/login']"
+                                class="font-semibold text-primary">Sign in</a></p>
                 </div>
             </div>
         </div>

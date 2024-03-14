@@ -26,10 +26,13 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .authorizeRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/api/auth/**").permitAll() // Allow access to /api/auth/** without authentication
-                        .anyRequest().authenticated() // Require authentication for any other requests
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/field/**").permitAll()
+                        .requestMatchers("/api/user/{id}").permitAll()
+                        .anyRequest().authenticated() //
                 )
                 .addFilterBefore(new JWTAuthorizationFilter(userDetailService), UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())

@@ -21,6 +21,7 @@ public class User {
 
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -30,8 +31,16 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean verified;
+
+
     @OneToOne
     private Field field;
+
+
+
 
 
 }

@@ -6,6 +6,7 @@ import { HomepageComponent } from './Pages/homepage/homepage.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { ListClubComponent } from './Pages/admin/club/list-club/list-club.component';
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
+import { VerifcationComponent } from './Pages/verifcation/verifcation.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomepageComponent },
   { path: 'register', component: RegisterComponent},
+  { path: 'verify/:token', component: VerifcationComponent },
 
   //admin group routes
   {

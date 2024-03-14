@@ -2,6 +2,7 @@ import { Club } from "./Club";
 
 // Event.ts
 export interface Event {
+    id: number;
     name: string;
     description: string;
     number_places: number;

@@ -45,6 +45,8 @@ public class UserService implements UserDetailsService {
         existingUser.setPassword(user.getPassword());
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
+        existingUser.setVerified(user.isVerified());
+
         return userRepo.save(existingUser) ;
     }
 
@@ -58,8 +60,6 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getALLUserInfo(){return userRepo.findAll();}
-
-
 
 
     @Autowired

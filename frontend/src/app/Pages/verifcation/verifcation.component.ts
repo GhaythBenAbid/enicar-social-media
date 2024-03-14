@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { NgToastService } from 'ng-angular-popup';
 import { User } from 'src/app/Models/User';
 import { UserService } from 'src/app/Services/user.service';
 
@@ -16,7 +17,7 @@ export class VerifcationComponent {
   user : User | undefined;
 
   token : string = '';
-  constructor(private route: ActivatedRoute , private userService : UserService) { }
+  constructor(private route: ActivatedRoute , private userService : UserService , private toast : NgToastService) { }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.paramMap.get('token') || '';
@@ -30,8 +31,13 @@ export class VerifcationComponent {
   verify(){
     this.user!.verified = true;
     this.userService.updateUser(this.id , this.user!).subscribe((res: any) => {
-      console.log(res);
-      window.location.href = '/login';
+      this.toast.success({detail : 'Success' , summary: 'User Verified' , duration: 2000});
+
+      //after 2 seconds redirect to login page
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
+
     });
   }
 

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -26,9 +28,13 @@ public class UserController {
     }
 
     @PutMapping("/{userID}")
-    public ResponseEntity<String> updateUserDetails(@PathVariable("userID") int userID,@RequestBody User user){
+    public ResponseEntity<Object> updateUserDetails(@PathVariable("userID") int userID,@RequestBody User user){
         this.userService.UpdateUserInfo(userID,user);
-        return new ResponseEntity<>("User Updated Successfully",HttpStatus.OK) ;
+
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("message", "User Updated Successfully");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 

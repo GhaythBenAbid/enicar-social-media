@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { RegisterComponent } from './Pages/register/register.component';
 import { VerifcationComponent } from './Pages/verifcation/verifcation.component';
+import { ListUserComponent } from './Pages/admin/user/list-user/list-user.component';
+import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { VerifcationComponent } from './Pages/verifcation/verifcation.component'
     ListClubComponent,
     NavbarComponent,
     RegisterComponent,
-    VerifcationComponent
+    VerifcationComponent,
+    ListUserComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import { VerifcationComponent } from './Pages/verifcation/verifcation.component'
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgToastModule
+    NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

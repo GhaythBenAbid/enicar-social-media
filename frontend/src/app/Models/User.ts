@@ -8,7 +8,7 @@ export interface User {
     email: string;
     password: string;
     role: string;
-    birthDate: string;
+    birthDate: Date;
     verified: boolean;
     field: Field;
 }

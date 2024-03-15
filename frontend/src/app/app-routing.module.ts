@@ -8,6 +8,8 @@ import { ListClubComponent } from './Pages/admin/club/list-club/list-club.compon
 import { ErrorPageComponent } from './Pages/error-page/error-page.component';
 import { VerifcationComponent } from './Pages/verifcation/verifcation.component';
 import { AuthGuard } from './Utils/auth.guard';
+import { ListUserComponent } from './Pages/admin/user/list-user/list-user.component';
+import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.component';
 
 
 const routes: Routes = [
@@ -23,7 +25,11 @@ const routes: Routes = [
     path: 'admin',
     canActivate: [AuthGuard],
     children: [
-      { path: 'club', component: ListClubComponent }, 
+      { path: 'club', component: ListClubComponent },
+      
+      
+      { path: 'user' , component : ListUserComponent },
+      { path: 'user/edit/:id' , component : EditUserComponent }
     ],
   },
 

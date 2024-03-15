@@ -16,15 +16,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user-club")
 public class UserClubController {
-    @Autowired
 
+    @Autowired
     private UserClubService userClubService;
 
     @PostMapping
     public ResponseEntity<Object> createUserDetails(@RequestBody UserClub userClub){
-        userClubService.CreateUserClubInfo(userClub);
+        UserClub newUserClub = userClubService.CreateUserClubInfo(userClub);
         HashMap<String, Object> response = new HashMap<>();
-        response.put("message", "UserClub Created Successfully");
+        response.put("userClub", newUserClub);
 
         return new ResponseEntity<>(response,HttpStatus.CREATED) ;
 

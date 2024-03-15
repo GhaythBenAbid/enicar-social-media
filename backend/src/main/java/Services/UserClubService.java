@@ -3,7 +3,9 @@ package Services;
 import Models.Club;
 import Models.User;
 import Models.UserClub;
+import Repositories.ClubRepository;
 import Repositories.UserClubRepository;
+import Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,23 +16,36 @@ import java.util.List;
 
 @Service
 public class UserClubService {
-    private final UserClubRepository userClubRepo;
-    @Autowired
-    public UserClubService(UserClubRepository userClubRepo){this.userClubRepo = userClubRepo ;}
 
-    public String CreateUserClubInfo(UserClub userClub){
-        userClubRepo.save(userClub);
-        return "UserCLub Created Successfully ";
+    @Autowired
+    private UserClubRepository userClubRepo;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ClubRepository clubRepository;
+
+
+    public UserClub CreateUserClubInfo(UserClub userClub){
+        User user = userRepository.findById((long) userClub.getUser().getId()).orElse(null);
+        userClub.setUser(user);
+
+        Club club = clubRepository.findById((long) userClub.getClub().getId()).orElse(null);
+        userClub.setClub(club);
+
+        return userClubRepo.save(userClub);
 
     }
 
-    //hna ya gaith
-
-
     public UserClub UpdateUserClubInfo(long userClubID , UserClub userClub){
-        UserClub existingUserClub = userClubRepo.findById(userClubID).get() ;
-        existingUserClub.setUser(UserClub.getUser()) ;
-        existingUserClub.setClub(UserClub.getClub());
+        UserClub existingUserClub = userClubRepo.findById(userClubID).get();
+
+        User user = userRepository.findById((long) userClub.getUser().getId()).orElse(null);
+        existingUserClub.setUser(user) ;
+
+        Club club = clubRepository.findById((long) userClub.getClub().getId()).orElse(null);
+        existingUserClub.setClub(club);
         existingUserClub.setDate(userClub.getDate());
 
         return userClubRepo.save(existingUserClub) ;

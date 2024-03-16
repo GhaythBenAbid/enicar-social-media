@@ -8,6 +8,7 @@ import { User } from '../Models/User'; // Make sure to import your User model
 })
 export class UserService {
   private baseUrl = 'http://localhost:9000/api/user';
+  private token = localStorage.getItem('token') || '';
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +25,8 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}`);
+    const headers = { 'Authorization': `Bearer ${this.token}` };
+    return this.http.get<User[]>(`${this.baseUrl}`, { headers });
   }
 
   deleteUser(userID: number): Observable<any> {

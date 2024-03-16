@@ -28,6 +28,7 @@ public class User {
 
     private String role;
 
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 

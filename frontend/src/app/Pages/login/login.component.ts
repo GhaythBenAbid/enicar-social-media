@@ -18,12 +18,13 @@ export class LoginComponent {
     login() {
         //in success, navigate to homepage and in error, show error message
         this.authService.login(this.email, this.password).subscribe((res: any) => {
+            localStorage.setItem('currentUser', JSON.stringify(res.user));
             localStorage.setItem('token', res.token);
             console.log(res);
             this.toast.success({detail:"SUCCESS",summary:'User Logged In Successfully!',duration:1000});
             //after one second, navigate to homepage
             setTimeout(() => {
-                window.location.href = '/homepage';
+                window.location.href = '/home';
             }, 1000);
         }, (error) => {
             this.toast.error({detail:"ERROR",summary:error.error.errors,duration:3000});

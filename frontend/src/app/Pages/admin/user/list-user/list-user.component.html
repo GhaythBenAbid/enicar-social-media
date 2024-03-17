@@ -1,4 +1,9 @@
 <app-navbar></app-navbar>
+
+
+<app-add-user *ngIf="addUserModal" (closeModal)="toggleAddUserModal(false)" (addUserSuccess)="getAllUsers()"></app-add-user>
+
+
 <div class="px-4 sm:px-6 max-w-7xl mx-auto mt-8 lg:px-8">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
@@ -6,7 +11,7 @@
         <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Add user</button>
+        <button (click)="toggleAddUserModal(true)" type="button" class="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Add user</button>
       </div>
     </div>
     <div class="mt-8 flow-root">
@@ -15,11 +20,11 @@
           <table class="min-w-full border-separate border-spacing-0">
             <thead>
               <tr>
-                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Name</th>
-                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Title</th>
-                <th scope="col" class="sticky top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Email</th>
-                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">Role</th>
-                <th scope="col" class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                <th scope="col" class="top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">Name</th>
+                <th scope="col" class="top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Title</th>
+                <th scope="col" class="top-0 z-10 hidden border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Email</th>
+                <th scope="col" class="top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">Role</th>
+                <th scope="col" class="top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
                   <span class="sr-only">Edit</span>
                 </th>
               </tr>
@@ -36,7 +41,11 @@
                 <td class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8">
                   <a 
                   [routerLink]="['/admin/user/edit', user.id]"
-                  class="text-primary hover:text-primary">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                  class="text-primary hover:text-primary mr-2">Edit</a>
+                  <a  (click)="toggleDeleteUserModal(user.id)"
+                  class="text-red-500 hover:text-red-800 ml-2">Delete</a>
+
+                  <app-delete-user [user]="user" *ngIf="deleteUserModal == user.id" (closeModal)="toggleDeleteUserModal(0)" (deleteUserSuccess)="getAllUsers()"></app-delete-user>
                 </td>
               </tr>
   
@@ -46,5 +55,5 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
   

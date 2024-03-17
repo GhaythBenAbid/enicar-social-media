@@ -16,6 +16,8 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { VerifcationComponent } from './Pages/verifcation/verifcation.component';
 import { ListUserComponent } from './Pages/admin/user/list-user/list-user.component';
 import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.component';
+import { AddUserComponent } from './Pages/admin/user/add-user/add-user.component';
+import { DeleteUserComponent } from './Pages/admin/user/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.compon
     RegisterComponent,
     VerifcationComponent,
     ListUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    AddUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,

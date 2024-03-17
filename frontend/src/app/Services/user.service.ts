@@ -13,7 +13,8 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createUser(user: User): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, user);
+    const headers = { 'Authorization': `Bearer ${this.token}` };
+    return this.http.post(`${this.baseUrl}`, user, { headers });
   }
 
   updateUser(userID: number, user: User): Observable<any> {

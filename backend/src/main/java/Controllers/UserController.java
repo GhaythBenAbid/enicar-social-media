@@ -1,8 +1,11 @@
 package Controllers;
 
 
+import Dto.RegisterUser;
 import Models.User;
+import Services.AuthService;
 import Services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +23,14 @@ public class UserController {
     @Autowired
     private  UserService userService;
 
-    @PostMapping
-    public ResponseEntity<String> createUserDetails(@RequestBody  User user){
-        userService.CreateUserInfo(user);
-        return new ResponseEntity<>("User Created Successfuly",HttpStatus.CREATED) ;
+    @Autowired
+    private AuthService authService;
 
+    @PostMapping
+    public ResponseEntity<Object> createUserDetails(@RequestBody @Valid RegisterUser user){
+        // Register the user
+        User registeredUser = authService.register(user);
+        return ResponseEntity.ok(registeredUser);
     }
 
     @PutMapping("/{userID}")

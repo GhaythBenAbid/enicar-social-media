@@ -37,7 +37,7 @@ public class User {
     private boolean verified;
 
 
-    @OneToOne
+    @ManyToOne
     private Field field;
 
 

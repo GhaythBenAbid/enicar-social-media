@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/event")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class EventController {
-    // Your controller logic goes here
+
 
     @Autowired
     private EventService eventService;

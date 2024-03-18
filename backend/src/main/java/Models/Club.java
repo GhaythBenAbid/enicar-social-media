@@ -34,6 +34,5 @@ public class Club {
     @OneToOne
     private Content content;
     
-    @OneToMany(mappedBy = "club")
-    private List<Event> events;
+
 }

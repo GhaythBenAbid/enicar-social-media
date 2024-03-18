@@ -1,10 +1,10 @@
 package Controllers;
 
-import Models.Club;
+
 import Models.Event;
-import Models.User;
+
 import Services.EventService;
-import Services.UserService;
+
 import Utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

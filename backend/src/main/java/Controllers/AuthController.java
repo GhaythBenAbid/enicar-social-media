@@ -3,16 +3,14 @@ package Controllers;
 import Dto.RegisterUser;
 import Models.User;
 import Services.AuthService;
-import Services.UserService;
-import Utils.JWTUtils;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -55,4 +53,24 @@ public class AuthController {
 
 
     }
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestParam("email") String email) {
+        try {
+            authService.forgotPassword(email);
+            return ResponseEntity.ok().body("Password reset instructions sent to your email.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (MessagingException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
 }

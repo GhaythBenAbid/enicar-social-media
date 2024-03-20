@@ -1,11 +1,11 @@
 package Models;
 
-import jakarta.annotation.Nullable;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
+
 
 
 @Entity
@@ -34,6 +34,5 @@ public class Club {
     @OneToOne
     private Content content;
     
-    @OneToMany(mappedBy = "club")
-    private List<Event> events;
+
 }

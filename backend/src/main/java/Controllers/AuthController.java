@@ -53,8 +53,8 @@ public class AuthController {
 
 
     }
-    @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestParam("email") String email) {
+    @PostMapping("/{email}")
+    public ResponseEntity<?> forgotPassword(@PathVariable("email") String email) {
         try {
             authService.forgotPassword(email);
             return ResponseEntity.ok().body("Password reset instructions sent to your email.");

@@ -6,16 +6,16 @@ import Models.Field;
 import Models.User;
 import Repositories.FieldRepository;
 import Repositories.UserRepository;
-import Utils.ApiResponse;
 import Utils.EmailService;
 import Utils.JWTUtils;
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,6 +23,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+
+import static Utils.JWTUtils.generateToken;
 
 @Service
 public class AuthService {
@@ -38,6 +40,15 @@ public class AuthService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private JavaMailSender emailSender;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    @Autowired
+    private JWTUtils jwtUtils;
 
 
 
@@ -63,10 +74,10 @@ public class AuthService {
 
         User registeredUser = userRepository.save(user);
 
-        try{
+        try {
             emailService.sendHtmlMessage(user.getEmail(), "Welcome to ENICAR Social Media", "emailVerification.html", registeredUser);
 
-        }catch (MessagingException | IOException e) {
+        } catch (MessagingException | IOException e) {
             e.printStackTrace();
         }
 
@@ -79,14 +90,14 @@ public class AuthService {
 
         if (dbUser == null) {
             throw new IllegalArgumentException("this email does not exist");
-        }else if (!bCryptPasswordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
+        } else if (!bCryptPasswordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
             throw new IllegalArgumentException("Wrong password");
-        }else if (!dbUser.isVerified()) {
+        } else if (!dbUser.isVerified()) {
             throw new IllegalArgumentException("User is not verified");
-        }else{
+        } else {
             HashMap<String, Object> response = new HashMap<>();
             response.put("user", dbUser);
-            response.put("token", JWTUtils.generateToken(dbUser.getEmail()));
+            response.put("token", generateToken(dbUser.getEmail()));
             return response;
         }
 
@@ -94,10 +105,61 @@ public class AuthService {
     }
 
     //getUserDetails
-    public User getUserDetails(String email){
+    public User getUserDetails(String email) {
         return userRepository.findByEmail(email);
     }
 
+
+
+
+
+    public void forgotPassword(String email) throws IOException, MessagingException {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with email: " + email);
+        }
+
+
+        String resetLink = "http://localhost:4200/reset-password?token=" + JWTUtils.generateToken(String.valueOf(user.getId()));
+        String subject = "Reset your password";
+
+
+        Resource resource = resourceLoader.getResource("classpath:/templates/passwordReset.html");
+        byte[] bytes = Files.readAllBytes(Paths.get(resource.getURI()));
+        String content = new String(bytes, StandardCharsets.UTF_8);
+
+
+        content = content.replace("{{firstname}}", user.getFirstName());
+        content = content.replace("{{lastname}}", user.getLastName());
+        content = content.replace("{{linkpath}}", resetLink);
+
+
+
+
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo(email);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        emailSender.send(message);
+    }
+
+
+    public User UpdateUserInfo(long userID , User user){
+        User existingUser = userRepository.findById(userID).get() ;
+        existingUser.setBirthDate(user.getBirthDate()) ;
+        existingUser.setEmail(user.getEmail());
+        existingUser.setField(user.getField());
+        existingUser.setRole(user.getRole());
+        existingUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setVerified(user.isVerified());
+
+        return userRepository.save(existingUser) ;
+    }
 
 
 }

@@ -3,16 +3,14 @@ package Controllers;
 import Dto.RegisterUser;
 import Models.User;
 import Services.AuthService;
-import Services.UserService;
-import Utils.JWTUtils;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -47,12 +45,29 @@ public class AuthController {
     }
 
 
-    //secret route
-    @GetMapping("/secret")
-    public ResponseEntity<?> secretRoute(@RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok("You have access to this route");
-
-
-
+    @PostMapping("/forget-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody User user) {
+        try {
+            String email = user.getEmail();
+            authService.forgotPassword(email);
+            HashMap<String, String> response = new HashMap<>();
+            response.put("message", "Password reset instructions sent to your email.");
+            return ResponseEntity.ok().body(response);
+        } catch (IllegalArgumentException e) {
+            HashMap<String, String> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (MessagingException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
+
+
+
+
+
+
+
 }

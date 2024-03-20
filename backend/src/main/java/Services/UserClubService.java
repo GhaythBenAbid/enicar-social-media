@@ -36,6 +36,7 @@ public class UserClubService {
 
         return userClubRepo.save(userClub);
 
+
     }
 
     public UserClub UpdateUserClubInfo(long userClubID , UserClub userClub){
@@ -49,6 +50,7 @@ public class UserClubService {
         existingUserClub.setDate(userClub.getDate());
 
         return userClubRepo.save(existingUserClub) ;
+
     }
 
     public UserClub getUserClubInfo(long userClubID){
@@ -67,6 +69,6 @@ public class UserClubService {
 
 
 
-    // Your service logic goes here
+
 }
 

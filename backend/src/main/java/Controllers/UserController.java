@@ -35,7 +35,7 @@ public class UserController {
 
     @PutMapping("/{userID}")
     public ResponseEntity<Object> updateUserDetails(@PathVariable("userID") int userID,@RequestBody User user){
-        this.userService.UpdateUserInfo(userID,user);
+        this.authService.UpdateUserInfo(userID,user);
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", "User Updated Successfully");

@@ -45,21 +45,18 @@ public class AuthController {
     }
 
 
-    //secret route
-    @GetMapping("/secret")
-    public ResponseEntity<?> secretRoute(@RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok("You have access to this route");
-
-
-
-    }
-    @PostMapping("/{email}")
-    public ResponseEntity<?> forgotPassword(@PathVariable("email") String email) {
+    @PostMapping("/forget-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody User user) {
         try {
+            String email = user.getEmail();
             authService.forgotPassword(email);
-            return ResponseEntity.ok().body("Password reset instructions sent to your email.");
+            HashMap<String, String> response = new HashMap<>();
+            response.put("message", "Password reset instructions sent to your email.");
+            return ResponseEntity.ok().body(response);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            HashMap<String, String> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         } catch (MessagingException | IOException e) {
             throw new RuntimeException(e);
         }

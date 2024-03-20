@@ -10,6 +10,7 @@ import { VerifcationComponent } from './Pages/verifcation/verifcation.component'
 import { AuthGuard } from './Utils/auth.guard';
 import { ListUserComponent } from './Pages/admin/user/list-user/list-user.component';
 import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.component';
+import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomepageComponent , canActivate: [AuthGuard]},
   { path: 'register', component: RegisterComponent},
   { path: 'verify/:token', component: VerifcationComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
 
 
   //admin group routes

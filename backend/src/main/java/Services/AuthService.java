@@ -41,6 +41,16 @@ public class AuthService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private JavaMailSender emailSender;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    @Autowired
+    private JWTUtils jwtUtils;
+
+
 
     public User register(RegisterUser registerUser) {
         if (userRepository.existsByEmail(registerUser.getEmail())) {
@@ -101,14 +111,6 @@ public class AuthService {
 
 
 
-    @Autowired
-    private JavaMailSender emailSender;
-
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    @Autowired
-    private JWTUtils jwtUtils;
 
 
     public void forgotPassword(String email) throws IOException, MessagingException {
@@ -120,9 +122,6 @@ public class AuthService {
 
         String resetLink = "http://localhost:4200/reset-password?token=" + JWTUtils.generateToken(String.valueOf(user.getId()));
         String subject = "Reset your password";
-
-
-
 
 
         Resource resource = resourceLoader.getResource("classpath:/templates/passwordReset.html");
@@ -145,6 +144,21 @@ public class AuthService {
         helper.setText(content, true);
 
         emailSender.send(message);
+    }
+
+
+    public User UpdateUserInfo(long userID , User user){
+        User existingUser = userRepository.findById(userID).get() ;
+        existingUser.setBirthDate(user.getBirthDate()) ;
+        existingUser.setEmail(user.getEmail());
+        existingUser.setField(user.getField());
+        existingUser.setRole(user.getRole());
+        existingUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setVerified(user.isVerified());
+
+        return userRepository.save(existingUser) ;
     }
 
 

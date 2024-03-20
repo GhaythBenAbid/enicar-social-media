@@ -19,6 +19,7 @@ import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.compon
 import { AddUserComponent } from './Pages/admin/user/add-user/add-user.component';
 import { DeleteUserComponent } from './Pages/admin/user/delete-user/delete-user.component';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { ResetPasswordComponent } from './Pages/reset-password/reset-password.co
     EditUserComponent,
     AddUserComponent,
     DeleteUserComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SidebarComponent
+
   ],
   imports: [
     BrowserModule,

@@ -30,6 +30,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/field/**").permitAll()
                         .requestMatchers("/api/user/{id}").permitAll()
+                        .requestMatchers("/api/files/**").permitAll()
+                        .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated() //
                 )
                 .addFilterBefore(new JWTAuthorizationFilter(userDetailService), UsernamePasswordAuthenticationFilter.class)

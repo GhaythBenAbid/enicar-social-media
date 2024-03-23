@@ -24,7 +24,7 @@ export class LoginComponent {
             this.toast.success({detail:"SUCCESS",summary:'User Logged In Successfully!',duration:1000});
             //after one second, navigate to homepage
             setTimeout(() => {
-                window.location.href = '/home';
+                window.location.href = '/feed';
             }, 1000);
         }, (error) => {
             this.toast.error({detail:"ERROR",summary:error.error.errors,duration:3000});

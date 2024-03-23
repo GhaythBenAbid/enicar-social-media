@@ -43,7 +43,6 @@ public class RegisterUser {
     @NotNull(message = "Field is required")
     private int fieldId;
 
-
 }
 
 

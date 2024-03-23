@@ -20,6 +20,10 @@ import { AddUserComponent } from './Pages/admin/user/add-user/add-user.component
 import { DeleteUserComponent } from './Pages/admin/user/delete-user/delete-user.component';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { CalendarComponent } from './Pages/calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ClubsComponent } from './Pages/clubs/clubs.component';
+import { SettingsComponent } from './Pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,10 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
     AddUserComponent,
     DeleteUserComponent,
     ResetPasswordComponent,
-    SidebarComponent
+    SidebarComponent,
+    CalendarComponent,
+    ClubsComponent,
+    SettingsComponent
 
   ],
   imports: [
@@ -47,6 +54,7 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
     BrowserAnimationsModule,
     FormsModule,
     NgToastModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

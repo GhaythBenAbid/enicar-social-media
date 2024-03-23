@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -28,6 +29,13 @@ public class UserService implements UserDetailsService {
 
 
     private final UserRepository userRepo;
+
+
+    @Autowired
+    private StorageService storageService;
+
+
+
     @Autowired
     public UserService(UserRepository userRepo){this.userRepo = userRepo ;}
 
@@ -78,6 +86,24 @@ public class UserService implements UserDetailsService {
                 .password(user.getPassword())
                 .roles(user.getRole())
                 .build();
+    }
+
+
+    public User updateUserPicture(int userid , MultipartFile profilePicture , String type){
+
+        User user = userRepo.findById((long) userid).get();
+
+        if (type.equals("profile")){
+            String profilePictureName = storageService.storeFile(profilePicture);
+            user.setProfilePicture(profilePictureName);
+        }else if (type.equals("cover")){
+            String coverPictureName = storageService.storeFile(profilePicture);
+            user.setCoverPicture(coverPictureName);
+        }
+
+        return userRepo.save(user);
+
+
     }
 
 

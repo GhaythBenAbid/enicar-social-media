@@ -50,6 +50,9 @@ public class AuthService {
     @Autowired
     private JWTUtils jwtUtils;
 
+    @Autowired
+    private StorageService storageService;
+
 
 
     public User register(RegisterUser registerUser) {
@@ -157,6 +160,8 @@ public class AuthService {
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setVerified(user.isVerified());
+
+
 
         return userRepository.save(existingUser) ;
     }

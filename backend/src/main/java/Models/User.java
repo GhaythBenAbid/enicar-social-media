@@ -37,6 +37,14 @@ public class User {
     private boolean verified;
 
 
+    private String profilePicture;
+
+    private String coverPicture;
+
+
+    private String aboutMe;
+
+
     @ManyToOne
     private Field field;
 

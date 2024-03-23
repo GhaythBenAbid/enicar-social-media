@@ -20,8 +20,11 @@ public class Reaction {
     private User user;
 
     @ManyToOne
-    private TextPost textPost;
+    private Post post;
 
+    private String type;
+
+    private String comment;
 
     private Date date;
 }

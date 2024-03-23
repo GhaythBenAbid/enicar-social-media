@@ -11,15 +11,21 @@ import { AuthGuard } from './Utils/auth.guard';
 import { ListUserComponent } from './Pages/admin/user/list-user/list-user.component';
 import { EditUserComponent } from './Pages/admin/user/edit-user/edit-user.component';
 import { ResetPasswordComponent } from './Pages/reset-password/reset-password.component';
+import { CalendarComponent } from './Pages/calendar/calendar.component';
+import { ClubsComponent } from './Pages/clubs/clubs.component';
+import { SettingsComponent } from './Pages/settings/settings.component';
 
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomepageComponent , canActivate: [AuthGuard]},
+  { path: 'feed', component: HomepageComponent , canActivate: [AuthGuard]},
+  { path: 'clubs', component: ClubsComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'verify/:token', component: VerifcationComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'calendar', component: CalendarComponent },
+  { path: 'settings', component: SettingsComponent },
 
 
   //admin group routes

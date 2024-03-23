@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,15 @@ public class UserController {
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", "User Updated Successfully");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/updatePicture/{userID}")
+    public ResponseEntity<Object> updateUserPicture(@PathVariable("userID") int userID , @RequestParam String type , @RequestParam("picture") MultipartFile picture){
+        this.userService.updateUserPicture(userID, picture , type);
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("message", "User Picture Updated Successfully");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -1,8 +1,6 @@
 package Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +10,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
 public class Reaction {
+
+
+
     @Id
     private Long id;
 
@@ -22,9 +24,15 @@ public class Reaction {
     @ManyToOne
     private Post post;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private ReactionType type;
 
     private String comment;
 
     private Date date;
 }
+enum ReactionType {
+    LIKE,
+    LOVE,
+    WOW,
+    SAD}

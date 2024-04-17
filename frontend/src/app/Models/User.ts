@@ -8,7 +8,10 @@ export interface User {
     email: string;
     password: string;
     role: string;
+    aboutMe: string;
+    coverPicture: string;
     birthDate: Date;
+    profilePicture : string;
     verified: boolean;
     field: Field;
 }

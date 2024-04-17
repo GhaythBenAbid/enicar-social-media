@@ -26,7 +26,7 @@ export class AddUserComponent {
   password : string = '';
   birthDate : string = '';
   role : string = '';
-  verified : boolean = false;
+  verified : string = '';
   field : number = 1;
   
 
@@ -48,6 +48,8 @@ export class AddUserComponent {
 
 
   addUser(){
+
+
     this.user = {
       firstName : this.firstName,
       lastName : this.lastName,
@@ -55,7 +57,7 @@ export class AddUserComponent {
       password : this.password,
       birthDate : this.birthDate as any,
       role : this.role,
-      verified : this.verified,
+      verified : true,
       fieldId : this.field,
     }
     this.userService.createUser(this.user).subscribe((res: any) => {

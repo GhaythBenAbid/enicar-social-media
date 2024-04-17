@@ -25,6 +25,7 @@
     "@ng-icons/heroicons": "^27.1.0",
     "jwt-decode": "^4.0.0",
     "ng-angular-popup": "^0.5.2",
+    "primeng": "^16.2.0",
     "rxjs": "~7.8.0",
     "tailwindcss-hero-patterns": "^0.1.2",
     "tslib": "^2.3.0",

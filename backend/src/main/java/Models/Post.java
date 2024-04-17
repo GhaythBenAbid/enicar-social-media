@@ -1,10 +1,12 @@
 package Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,22 +16,22 @@ import java.util.List;
 @Data
 public class Post {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    private String title;
-
     private String content;
+
+    private String image;
 
     @ManyToOne
     private User author;
 
-    private String date;
+    private Date date;
 
-    @Column(columnDefinition = "JSON")
+    @Column(columnDefinition = "TEXT")
     @ElementCollection
     private List<String> tags;
 
-    private String visibility;
+    private boolean visibility;
 
 }

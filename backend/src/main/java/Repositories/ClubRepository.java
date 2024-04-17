@@ -5,7 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 public interface ClubRepository extends JpaRepository<Club, Long> {
-    // You can add custom query methods here if needed
+
+    List<Club> getClubsByResponsible_Id(long id);
+
 }

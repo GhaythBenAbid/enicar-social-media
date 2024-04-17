@@ -24,10 +24,11 @@
                     class="text-sm font-semibold leading-6 text-gray-900">Features</a>
                 <a (click)="scrollToElement('our-platform')" class="text-sm font-semibold leading-6 text-gray-900">Our
                     Platform</a>
-                <a routerLink="signup" class="text-sm font-semibold leading-6 text-gray-900">Get Started</a>
+                <a [routerLink]="['/register']" class="text-sm font-semibold leading-6 text-gray-900">Get Started</a>
+                <a [routerLink]="['/contact-us']" class="text-sm font-semibold leading-6 text-gray-900">Contact Us</a>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                <a [routerLink]="['/login']" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
                         aria-hidden="true">&rarr;</span></a>
             </div>
         </nav>
@@ -116,8 +117,9 @@
                     community.
                     Dive into a vibrant virtual space that brings every aspect of campus life right to your fingertips
                 </p>
+                
                 <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#"
+                    <a [routerLink]="['/register']"
                         class="rounded-md bg-gradient-to-r from-blue-900 via-blue-800 to-primary background-animate px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Get
                         started</a>
                     <a href="#" class="text-sm font-semibold leading-6 text-gray-900">

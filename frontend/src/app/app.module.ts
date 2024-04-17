@@ -24,6 +24,15 @@ import { CalendarComponent } from './Pages/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ClubsComponent } from './Pages/clubs/clubs.component';
 import { SettingsComponent } from './Pages/settings/settings.component';
+import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
+import { DialogModule } from 'primeng/dialog';
+import { ClubDetailsComponent } from './Pages/club-details/club-details.component';
+import { MyAccountComponent } from './Pages/my-account/my-account.component';
+import { EventsComponent } from './Pages/events/events.component';
+import { StoriesComponent } from './Components/stories/stories.component';
+import { EditClubComponent } from './Pages/admin/club/edit-club/edit-club.component';
+import { AddEventComponent } from './Pages/add-event/add-event.component';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +53,14 @@ import { SettingsComponent } from './Pages/settings/settings.component';
     SidebarComponent,
     CalendarComponent,
     ClubsComponent,
-    SettingsComponent
+    SettingsComponent,
+    ContactUsComponent,
+    ClubDetailsComponent,
+    MyAccountComponent,
+    EventsComponent,
+    StoriesComponent,
+    EditClubComponent,
+    AddEventComponent
 
   ],
   imports: [
@@ -54,7 +70,8 @@ import { SettingsComponent } from './Pages/settings/settings.component';
     BrowserAnimationsModule,
     FormsModule,
     NgToastModule,
-    FullCalendarModule
+    FullCalendarModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

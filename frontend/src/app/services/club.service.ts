@@ -10,6 +10,7 @@ export class ClubService {
 
 
   private baseUrl = 'http://localhost:9000/api/club'; // Update the base URL as per your Spring Boot server
+  private headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
 
   constructor(private http: HttpClient) { }
 
@@ -18,15 +19,15 @@ export class ClubService {
   }
 
   getAllClubs(): Observable<Club[]> {
-    return this.http.get<Club[]>(`${this.baseUrl}`);
+    return this.http.get<Club[]>(`${this.baseUrl}` , { headers: this.headers });
   }
 
   getClubById(id: number): Observable<Club> {
-    return this.http.get<Club>(`${this.baseUrl}/${id}`);
+    return this.http.get<Club>(`${this.baseUrl}/${id}` , { headers: this.headers });
   }
 
   updateClub(id: number, club: Club): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, club);
+    return this.http.put(`${this.baseUrl}/${id}`, club , { headers: this.headers });
   }
 
   deleteClub(id: number): Observable<any> {

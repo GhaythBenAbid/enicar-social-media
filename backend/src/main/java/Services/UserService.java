@@ -1,7 +1,9 @@
 package Services;
 
 
+import Models.Club;
 import Models.User;
+import Repositories.ClubRepository;
 import Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +32,8 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepo;
 
+    @Autowired
+    private ClubRepository clubRepository;
 
     @Autowired
     private StorageService storageService;
@@ -62,6 +66,11 @@ public class UserService implements UserDetailsService {
          return userRepo.findById(userID).orElse(null);
     }
 
+    public List<Club> getClubs(long userID){
+        System.out.println(clubRepository.getClubsByResponsible_Id(userID));
+        return clubRepository.getClubsByResponsible_Id(userID);
+    }
+
     public String DeleteUserInfo(long userID){
         userRepo.deleteById(userID);
         return "User Deleted Successfully ";
@@ -86,24 +95,6 @@ public class UserService implements UserDetailsService {
                 .password(user.getPassword())
                 .roles(user.getRole())
                 .build();
-    }
-
-
-    public User updateUserPicture(int userid , MultipartFile profilePicture , String type){
-
-        User user = userRepo.findById((long) userid).get();
-
-        if (type.equals("profile")){
-            String profilePictureName = storageService.storeFile(profilePicture);
-            user.setProfilePicture(profilePictureName);
-        }else if (type.equals("cover")){
-            String coverPictureName = storageService.storeFile(profilePicture);
-            user.setCoverPicture(coverPictureName);
-        }
-
-        return userRepo.save(user);
-
-
     }
 
 

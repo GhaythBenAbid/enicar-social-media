@@ -152,14 +152,52 @@ public class AuthService {
 
     public User UpdateUserInfo(long userID , User user){
         User existingUser = userRepository.findById(userID).get() ;
-        existingUser.setBirthDate(user.getBirthDate()) ;
-        existingUser.setEmail(user.getEmail());
-        existingUser.setField(user.getField());
-        existingUser.setRole(user.getRole());
-        existingUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setVerified(user.isVerified());
+        if(user.getBirthDate() != null){
+            existingUser.setBirthDate(user.getBirthDate());
+        }
+
+        if(user.getEmail() != null){
+            existingUser.setEmail(user.getEmail());
+        }
+
+        if(user.getField() != null){
+            existingUser.setField(user.getField());
+        }
+
+        if(user.getRole() != null){
+            existingUser.setRole(user.getRole());
+        }
+
+        if(user.getPassword() != null){
+            existingUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+
+        if(user.getFirstName() != null){
+            existingUser.setFirstName(user.getFirstName());
+        }
+
+        if(user.getLastName() != null){
+            existingUser.setLastName(user.getLastName());
+        }
+
+        if(user.isVerified() != existingUser.isVerified()){
+            existingUser.setVerified(user.isVerified());
+        }
+
+        if(user.getProfilePicture() != null){
+            existingUser.setProfilePicture(user.getProfilePicture());
+        }
+
+        if(user.getCoverPicture() != null){
+            existingUser.setCoverPicture(user.getCoverPicture());
+        }
+
+        if(user.getAboutMe() != null){
+            existingUser.setAboutMe(user.getAboutMe());
+        }
+
+
+
 
 
 

@@ -1,0 +1,104 @@
+<app-navbar></app-navbar>
+<div class="px-4 sm:px-6 max-w-7xl mx-auto mt-8 lg:px-8">
+    <form>
+        <div class="space-y-12">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+                <div>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Profile {{club.name}}</h2>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">
+                        This information will be displayed publicly so be careful what you share.
+                    </p>
+                </div>
+
+                <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
+                    <div class="sm:col-span-4">
+                        <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">Club
+                            Name</label>
+                        <div class="mt-2">
+                            <div
+                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary sm:max-w-md">
+                                <input type="text" name="firstname" id="firstname" [(ngModel)]="club.name"
+                                    value="{{club!.name}}"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    placeholder="Enter your first name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-4">
+                        <label for="lastname"
+                            class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                        <div class="mt-2">
+                            <div
+                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary sm:max-w-md">
+                                <input type="text" name="lastname" id="lastname" [(ngModel)]="club.description"
+                                    value="{{club!.description}}"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    placeholder="Enter your last name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-4">
+                        <label for="lastname"
+                            class="block text-sm font-medium leading-6 text-gray-900">Logo</label>
+                        <div class="mt-2">
+                            <div
+                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary sm:max-w-md">
+                                <img src="{{club!.logo}}" alt="user image"
+                                    class="w-32 h-32 object-cover object-center z-10 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-4">
+                        <label for="lastname"
+                            class="block text-sm font-medium leading-6 text-gray-900">Banner</label>
+                        <div class="mt-2">
+                            <div
+                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary sm:max-w-md">
+                                <img src="{{club!.banner}}" alt="user image"
+                                    class="w-full object-cover object-center z-10 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sm:col-span-4">
+                        <label for="birthdate" class="block text-sm font-medium leading-6 text-gray-900">Creation Year</label>
+                        <div class="mt-2">
+                            <div class="flex9 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary sm:max-w-md">
+                                <input type="text" name="birthdate" id="birthdate" [(ngModel)]="club.creationYear"
+                                    value="{{club!.creationYear}}"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    placeholder="Enter your birthdate">
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    
+                    <div class="sm:col-span-4">
+                        <label for="field" class="block text-sm font-medium leading-6 text-gray-900">Responsible</label>
+                        <div class="mt-2">
+                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary sm:max-w-md">
+                                <select name="field"
+                                    value="{{club!.responsible.id}}"
+                                    [(ngModel)]="club.responsible.id"
+                                    class="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                                    required>
+                                    <option [selected]="club!.responsible.id == user.id" *ngFor="let user of users"
+                                        [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+            <button type="submit" (click)="updateUser()"
+                class="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save</button>
+        </div>
+    </form>
+</div>

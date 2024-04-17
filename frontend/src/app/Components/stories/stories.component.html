@@ -1,0 +1,13 @@
+<div class="flex overflow-x-auto space-x-8 mx-auto max-w-6xl">
+    <section class="flex-shrink-0 rounded-full" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+      <div class="story-item relative hover:opacity-90 cursor-pointer transition duration-200 ease-in-out"
+        style="width: 136px;">
+        <img src="https://picsum.photos/id/{{i*10 +200}}/200/300" class="rounded-xl" />
+        <div class="absolute flex flex-col justify-between h-full w-full top-0 left-0 py-4">
+          <img src="https://picsum.photos/id/{{i + 200}}/50/50"
+            class="rounded-full w-10 h-10 border-4 border-blue-500 ml-4" />
+          <div class="text-center text-white"></div>
+        </div>
+      </div>
+    </section>
+  </div>

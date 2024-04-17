@@ -28,7 +28,7 @@ public class Club {
     
     private int creationYear;
 
-    @OneToOne
+    @ManyToOne
     private User responsible;
 
     @OneToOne

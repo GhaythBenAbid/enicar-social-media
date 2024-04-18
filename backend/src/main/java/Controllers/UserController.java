@@ -3,6 +3,7 @@ package Controllers;
 
 import Dto.RegisterUser;
 import Models.Club;
+import Models.Post;
 import Models.User;
 import Services.AuthService;
 import Services.ClubService;
@@ -99,6 +100,11 @@ public class UserController {
     public ResponseEntity<List<Club>> getUserClubs(@PathVariable("UserID") int userID) {
         List<Club> clubs = userService.getClubs(userID);
         return new ResponseEntity<>(clubs, HttpStatus.OK);
+    }
+    @GetMapping("/{UserID}/posts")
+    public ResponseEntity<List<Post>> getUserPosts(@PathVariable("UserID") int userID) {
+        List<Post> posts = userService.getPosts(userID);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 

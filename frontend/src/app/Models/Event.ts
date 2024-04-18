@@ -4,6 +4,7 @@ import { Club } from "./Club";
 export interface Event {
     id: number;
     name: string;
+    banner: string;
     description: string;
     number_places: number;
     start_date: string;

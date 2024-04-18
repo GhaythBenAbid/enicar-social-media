@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EventService } from 'src/app/Services/event.service';
 
 @Component({
   selector: 'app-add-event',
@@ -17,10 +19,14 @@ export class AddEventComponent {
   status: string = '';
 
   @Output() close = new EventEmitter<boolean>();
+  id = this.route.snapshot.paramMap.get('id') || '';
+  
 
   closeAddEvent() {
     this.close.emit(false);
   }
+
+  constructor(private eventService : EventService , private route : ActivatedRoute) { }
 
 
   AddEvent() {
@@ -33,10 +39,17 @@ export class AddEventComponent {
       end_date: this.endDate,
       start_time: this.startTime,
       end_time: this.endTime,
-      status: this.status
+      status: this.status,
+      club: {
+        id: this.id
+      }
     }
 
-    console.log(event);
+    this.eventService.createEvent(event).subscribe((response: any) => {
+      this.closeAddEvent();
+    });
+
+
   }
 
 }

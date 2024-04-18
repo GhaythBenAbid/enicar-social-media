@@ -10,7 +10,7 @@
 
       <div class="w-full  flex max-w-6xl mx-auto mb-10">
         <div>
-          <img src="https://picsum.photos/id/237/200/300" class="w-20 h-20 rounded-full" />
+          <img src="{{user.profilePicture}}" class="w-20 h-20 rounded-full" />
         </div>
         <div class="ml-4">
           <h1
@@ -40,13 +40,13 @@
 
               <div (click)="visible = true"
                 class="bg-gray-100 w-full rounded-lg border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                What's on your mind, John Doe?
+                What's on your mind, {{user.firstName}} {{user.lastName}}?
               </div>
 
             </div>
             <hr>
-            <div class="flex justify-center items-center py-4 ">
-              <div class="flex items-center mx-8 text-lg text-primary">
+            <div class="flex justify-center items-center py-4 " >
+              <div class="flex items-center mx-8 text-lg text-primary" (click)="visible = true">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -57,7 +57,7 @@
                 </svg>
                 <p class="mx-2">Post</p>
               </div>
-              <div class="flex items-center mx-8 text-lg text-yellow-500">
+              <div class="flex items-center mx-8 text-lg text-yellow-500" (click)="visible = true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images"
                   viewBox="0 0 16 16">
                   <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
@@ -69,7 +69,7 @@
 
 
 
-              <div class="flex items-center mx-8 text-lg text-red-500">
+              <div class="flex items-center mx-8 text-lg text-red-500" (click)="visible = true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-calendar-event" viewBox="0 0 16 16">
                   <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />

@@ -2,8 +2,10 @@ package Services;
 
 import Models.Club;
 import Models.Content;
+import Models.Event;
 import Repositories.ClubRepository;
 import Repositories.ContentRepository;
+import Repositories.EventRepository;
 import Repositories.UserRepository;
 import jakarta.persistence.OneToOne;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,9 @@ public class ClubService {
     private final ClubRepository clubRepository;
     private final ContentRepository contentRepository;
     private final UserRepository userRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
 
     @Autowired
     public ClubService(ClubRepository clubRepository , ContentRepository contentRepository , UserRepository userRepository){
@@ -83,6 +88,10 @@ public class ClubService {
         } else {
             throw new IllegalArgumentException("Club not found with id: " + id);
         }
+    }
+
+    public List<Event> getEventsByClubId(Long id) {
+        return this.eventRepository.getEventsByClub_Id(id);
     }
 
 

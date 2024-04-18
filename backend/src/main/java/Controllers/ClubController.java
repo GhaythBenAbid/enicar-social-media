@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Club;
+import Models.Event;
 import Repositories.ClubRepository;
 import Utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,15 @@ public class ClubController {
             return new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND.value(), "Club not found with id: " + id), HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @GetMapping({"/{id}/events"})
+    public ResponseEntity<Object> getEventsByClubId(@PathVariable("id") Long id) {
+        List<Event> events = clubService.getEventsByClubId(id);
+        return new ResponseEntity<>(events, HttpStatus.OK);
+    }
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateClubDetails(@PathVariable("id") Long id, @RequestBody Club club) {

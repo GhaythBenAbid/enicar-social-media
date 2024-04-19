@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" xmlns="http://logging.apache.org/log4j/2.0/config">
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy/MM/dd HH:mm:ss} [%p] %c{1}:%L - %m%n"/>
+        </Console>
+
+        <RollingFile name="fichierLog" fileName="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierLog.log"
+                     filePattern="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierLog-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t]:%c{1} - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1024KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="fichierDebug" fileName="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierDebug.log"
+                     filePattern="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierDebug-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t]:%c{1} - %m%n"/>
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" />
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="fichierLog"/>
+            <AppenderRef ref="fichierDebug"/>
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
+
+

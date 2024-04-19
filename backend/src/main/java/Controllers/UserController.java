@@ -3,9 +3,11 @@ package Controllers;
 
 import Dto.RegisterUser;
 import Models.Club;
+import Models.Post;
 import Models.User;
 import Services.AuthService;
 import Services.ClubService;
+import Services.PostService;
 import Services.UserService;
 import Utils.CloudinarySDK;
 import jakarta.validation.Valid;
@@ -37,12 +39,16 @@ public class UserController {
     @Autowired
     private ClubService clubService;
 
+    @Autowired
+    private PostService postService;
+
     @PostMapping
     public ResponseEntity<Object> createUserDetails(@RequestBody @Valid RegisterUser user){
         // Register the user
         User registeredUser = authService.register(user);
         return ResponseEntity.ok(registeredUser);
     }
+
 
 
     @PutMapping("/{userID}")
@@ -99,6 +105,11 @@ public class UserController {
     public ResponseEntity<List<Club>> getUserClubs(@PathVariable("UserID") int userID) {
         List<Club> clubs = userService.getClubs(userID);
         return new ResponseEntity<>(clubs, HttpStatus.OK);
+    }
+    @GetMapping("/{UserID}/posts")
+    public ResponseEntity<List<Post>> getUserPosts(@PathVariable("UserID") int userID) {
+        List<Post> posts = userService.getPosts(userID);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 

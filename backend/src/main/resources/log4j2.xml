@@ -6,8 +6,8 @@
             <PatternLayout pattern="%d{yyyy/MM/dd HH:mm:ss} [%p] %c{1}:%L - %m%n"/>
         </Console>
 
-        <RollingFile name="fichierLog" fileName="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierLog.log"
-                     filePattern="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierLog-%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingFile name="fichierLog" fileName="./fichierLog.log"
+                     filePattern="./fichierLog-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t]:%c{1} - %m%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="1024KB"/>
@@ -15,8 +15,8 @@
             <DefaultRolloverStrategy max="5"/>
         </RollingFile>
 
-        <RollingFile name="fichierDebug" fileName="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierDebug.log"
-                     filePattern="C://Users/bouss/Documents/enicar-social-media/backend/src/main/resources/fichierDebug-%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingFile name="fichierDebug" fileName="./fichierDebug.log"
+                     filePattern="./fichierDebug-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t]:%c{1} - %m%n"/>
             <Filters>
                 <ThresholdFilter level="DEBUG" onMatch="ACCEPT" />

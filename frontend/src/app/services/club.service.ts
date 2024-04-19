@@ -26,6 +26,10 @@ export class ClubService {
     return this.http.get<Club>(`${this.baseUrl}/${id}` , { headers: this.headers });
   }
 
+  getEventsByClubId(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}/events` , { headers: this.headers });
+  }
+
   updateClub(id: number, club: Club): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, club , { headers: this.headers });
   }

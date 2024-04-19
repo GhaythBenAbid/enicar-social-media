@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Club;
+import Models.Event;
 import Repositories.ClubRepository;
 import Utils.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,13 @@ public class ClubController {
         }
     }
 
+
+
+    @GetMapping({"/{id}/events"})
+    public ResponseEntity<Object> getEventsByClubId(@PathVariable("id") Long id) {
+        List<Event> events = clubService.getEventsByClubId(id);
+        return new ResponseEntity<>(events, HttpStatus.OK);
+    }
 
 
     @PutMapping("/{id}")

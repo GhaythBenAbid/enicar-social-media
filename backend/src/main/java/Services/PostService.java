@@ -39,7 +39,8 @@ public class PostService {
     @Autowired
     private StorageService storageService;
 
-    public Post CreatePost(Post post){postRepo.save(post);
+    public Post CreatePost(Post post){
+        postRepo.save(post);
         return post;
     }
 

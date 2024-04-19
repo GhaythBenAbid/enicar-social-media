@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
 public class EventService {
     // Your service logic goes here
@@ -21,6 +23,8 @@ public class EventService {
     private EventRepository eventRepo;
     @Autowired
     private ClubRepository clubRepo ;
+
+
 
     @Autowired
     public EventService(EventRepository Repo , ClubRepository Crepo) {
@@ -84,6 +88,7 @@ public class EventService {
             }
             if (event.getStatus() != null) {
                 existingEvent.setStatus(event.getStatus());
+
             }
 
             return eventRepo.save(existingEvent);

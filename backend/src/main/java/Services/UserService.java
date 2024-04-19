@@ -2,8 +2,10 @@ package Services;
 
 
 import Models.Club;
+import Models.Post;
 import Models.User;
 import Repositories.ClubRepository;
+import Repositories.PostRepository;
 import Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,7 +39,8 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private StorageService storageService;
-
+    @Autowired
+    private PostRepository postRepository;
 
 
     @Autowired
@@ -63,12 +66,16 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserInfo(long userID){
-         return userRepo.findById(userID).orElse(null);
+        return userRepo.findById(userID).orElse(null);
     }
 
     public List<Club> getClubs(long userID){
         System.out.println(clubRepository.getClubsByResponsible_Id(userID));
         return clubRepository.getClubsByResponsible_Id(userID);
+    }
+    public List<Post> getPosts(long userID){
+        System.out.println(postRepository.getPostsByAuthor_Id(userID));
+        return postRepository.getPostsByAuthor_Id(userID);
     }
 
     public String DeleteUserInfo(long userID){

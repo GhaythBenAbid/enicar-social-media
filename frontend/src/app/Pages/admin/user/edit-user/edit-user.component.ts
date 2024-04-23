@@ -39,8 +39,26 @@ export class EditUserComponent {
 
   }
 
+  
+
   updateUser(){
-    this.userService.updateUser(this.id , this.user).subscribe((res: any) => {
+    const user = new FormData();
+    user.append('firstName' , this.user.firstName);
+    user.append('lastName' , this.user.lastName);
+    user.append('birthDate' , this.user.birthDate.toString());
+    user.append('verified' , this.user.verified.toString());
+    user.append('profilePicture' , this.user.profilePicture);
+    user.append('coverPicture' , this.user.coverPicture);
+    user.append('aboutMe' , this.user.aboutMe);
+
+
+
+
+
+
+
+
+    this.userService.updateUser(this.id , user).subscribe((res: any) => {
       this.toast.success({detail : 'Success' , summary: 'User Updated' , duration: 2000});
     });
   }

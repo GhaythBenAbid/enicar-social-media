@@ -17,7 +17,11 @@ public class ReactionService {
     // Your service logic goes here
     @Autowired
     ReactionRepository Myrepo ;
+
+    @Autowired
     PostRepository Prepo ;
+
+    @Autowired
     UserRepository Urepo ;
 
 
@@ -74,7 +78,6 @@ public class ReactionService {
     public List<Reaction> GetALLReactionInfo() {return Myrepo.findAll();}
 
     public Optional<Reaction> GetReactionInfo(Long ReactionID ){ return  Myrepo.findById(ReactionID);}
-
 
 
 

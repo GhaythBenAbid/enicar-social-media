@@ -27,10 +27,10 @@
                 class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div>
                     <h2 id="modal-title" class="text-lg font-medium leading-6 text-gray-900">
-                        Add User
+                        Add Event
                     </h2>
                     <p class="mt-1 text-sm text-gray-500">
-                        Fill in the form below to add a new user to your account.
+                        Fill in the form below to add a new event to the club.
                     </p>
 
 
@@ -55,6 +55,14 @@
                                             <textarea id="description" name="description" [(ngModel)]="eventDescription"
                                                 class="block w-full px-3 py-2 mt-1 text-sm text-gray-900 border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                                                 rows="4" placeholder="Enter event description"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="my-2 sm:col-span-4">
+                                        <label for="banner" class="block text-sm font-medium leading-6 text-gray-900">Banner</label>
+                                        <div class="mt-2">
+                                            <input type="file" id="banner" name="banner" (change)="onFileSelected($event)"
+                                                class="block w-full px-3 py-2 mt-1 text-sm text-gray-900 border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
                                         </div>
                                     </div>
                                 
@@ -111,15 +119,7 @@
                                             </div>
                                         </div>
                                 
-                                        <!-- <div class="my-2">
-                                            <label for="club" class="block text-sm font-medium leading-6 text-gray-900">Club</label>
-                                            <div class="mt-2">
-                                                <select id="club" name="club" [(ngModel)]="selectedClubId"
-                                                    class="block w-full px-3 py-2 mt-1 text-sm text-gray-900 border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
-                                                    <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
+                                        
                                     </div>
                                 </div>
                                 

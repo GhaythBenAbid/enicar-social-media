@@ -17,6 +17,7 @@ export class AddEventComponent {
   endTime: string = '';
   numberPlaces: number = 0;
   status: string = '';
+  banner: File | undefined;
 
   @Output() close = new EventEmitter<boolean>();
   id = this.route.snapshot.paramMap.get('id') || '';
@@ -29,21 +30,24 @@ export class AddEventComponent {
   constructor(private eventService : EventService , private route : ActivatedRoute) { }
 
 
+  onFileSelected(event: any) {
+    this.banner = event.target.files[0];
+  }
+
   AddEvent() {
 
-    const event = {
-      name: this.eventName,
-      description: this.eventDescription,
-      number_places: this.numberPlaces,
-      start_date: this.startDate,
-      end_date: this.endDate,
-      start_time: this.startTime,
-      end_time: this.endTime,
-      status: this.status,
-      club: {
-        id: this.id
-      }
-    }
+    const event = new FormData();
+    event.append('name', this.eventName);
+    event.append('description', this.eventDescription);
+    event.append('number_places', this.numberPlaces.toString());
+    event.append('start_date', this.startDate);
+    event.append('end_date', this.endDate);
+    event.append('start_time', this.startTime);
+    event.append('end_time', this.endTime);
+    event.append('status', this.status);
+    event.append('Banner', this.banner!);
+    event.append('club', this.id);
+
 
     this.eventService.createEvent(event).subscribe((response: any) => {
       this.closeAddEvent();

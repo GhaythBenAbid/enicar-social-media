@@ -32,6 +32,8 @@ import { EventsComponent } from './Pages/events/events.component';
 import { StoriesComponent } from './Components/stories/stories.component';
 import { EditClubComponent } from './Pages/admin/club/edit-club/edit-club.component';
 import { AddEventComponent } from './Pages/add-event/add-event.component';
+import { LogoutComponent } from './Pages/logout/logout.component';
+import { EventDetailsComponent } from './Pages/event-details/event-details.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { AddEventComponent } from './Pages/add-event/add-event.component';
     EventsComponent,
     StoriesComponent,
     EditClubComponent,
-    AddEventComponent
+    AddEventComponent,
+    LogoutComponent,
+    EventDetailsComponent
 
   ],
   imports: [

@@ -81,12 +81,12 @@ public class UserController {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setVerified(true);
         Date date = null;
         if (birthDate != null && !birthDate.equals("null")) {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
         }
         user.setBirthDate(date);
-        user.setVerified(verified);
         if (profilePicture != null) {
             user.setProfilePicture(CloudinarySDK.imageUpload(profilePicture));
         }
@@ -124,6 +124,7 @@ public class UserController {
         try {
             Models.User user = userService.getUserInfo(userID);
             log.info("Successfully retrieved user : {}",userID);
+            System.out.println(user);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Error occurred while getting user info", e);

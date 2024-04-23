@@ -10,4 +10,5 @@ export interface Post {
     date : string;
     visibility: boolean;
     tags: string[];
+    reactions: any[];
 }

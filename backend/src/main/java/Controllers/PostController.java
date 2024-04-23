@@ -1,5 +1,6 @@
 package Controllers;
 
+import Dto.PostDto;
 import Models.Event;
 import Repositories.UserRepository;
 import Utils.CloudinarySDK;
@@ -90,8 +91,8 @@ public class PostController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<Post>> getALLPostDetails(){
-        return  new ResponseEntity<>(this.postService.getALLPostInfo(),HttpStatus.OK) ;}
+    public ResponseEntity<List<PostDto>> getALLPostDetails(){
+        return  new ResponseEntity<>(this.postService.getAllPosts(),HttpStatus.OK) ;}
 
     @GetMapping("/{postID}")
     public  ResponseEntity<Object> getPostDetails(@PathVariable("postID") int postID) {

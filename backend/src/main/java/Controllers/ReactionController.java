@@ -4,6 +4,7 @@ package Controllers;
 import Models.Reaction;
 import Services.ReactionService;
 import Utils.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reaction")
+@RequestMapping("/api/reaction")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class ReactionController {
-    // Your controller logic goes here
-    ReactionService reactionService;
+
+    @Autowired
+    private ReactionService reactionService;
+
+
+
     @GetMapping("/{reactionID}")
     public  ResponseEntity<Object> getReactionDetails(@PathVariable("reactionID") long ReactionID) {
         Models.Reaction reaction = reactionService.GetReactionInfo(ReactionID).orElse(null);
@@ -49,7 +55,6 @@ public class ReactionController {
 
     @PostMapping
     public ResponseEntity createReactionDetails(@RequestBody Reaction reaction){
-
         try {
             Reaction newReaction = this.reactionService.CreateReactionInfo(reaction);
             return new ResponseEntity(newReaction, HttpStatus.CREATED);
@@ -57,5 +62,6 @@ public class ReactionController {
             return new ResponseEntity(new ApiResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
 
 }

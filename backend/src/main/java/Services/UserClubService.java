@@ -65,7 +65,16 @@ public class UserClubService {
     public List<UserClub> getALLUserClubInfo(){return userClubRepo.findAll();}
 
 
+    //getUserClubsByUserID
+    public List<UserClub> getUserClubByUserID(long userClubID){
+        return userClubRepo.findUserClubsByUser_Id(userClubID);
+    }
 
+
+    //getUserClubByUserIdAndClubId
+    public List<UserClub> getUserClubByUserIdAndClubId(long userID, long clubID){
+        return userClubRepo.findUserClubsByUser_IdAndClub_Id(userID, clubID);
+    }
 
 
 

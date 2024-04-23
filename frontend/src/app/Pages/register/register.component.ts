@@ -51,10 +51,9 @@ export class RegisterComponent {
       birthDate: this.birthDate,
       fieldId: this.selectedField
     }).subscribe((res: any) => {
-      console.log(res);
       this.toast.success({ detail: "SUCCESS", summary: 'User Registered Successfully!', duration: 1000 });
       setTimeout(() => {
-        // window.location.href = '/login';
+        window.location.href = '/login';
       }, 1000);
     }, (error) => {
       let errors = error.error.errors.join('\n');

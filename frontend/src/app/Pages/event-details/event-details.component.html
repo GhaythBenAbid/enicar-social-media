@@ -1,0 +1,133 @@
+<div>
+    <app-sidebar></app-sidebar>
+
+    <div class="lg:pl-72">
+
+        <!-- Global notification live region, render this permanently at the end of the document -->
+
+
+        <main class="bg-gray-100">
+            <img src="{{event!.banner ? event!.banner : 'https://scontent.ftun10-1.fna.fbcdn.net/v/t39.30808-6/214655522_2059005034237942_8200680362427823660_n.png?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SozObXrZoUwQ7kNvgEfnRwS&_nc_ht=scontent.ftun10-1.fna&oh=00_AfA2_s2kTqI5Nc7ULJdnp4W3jX2D4lCDNBmH839H7nPPew&oe=662D711E'}}"
+                alt="user image" class="w-full h-96 object-cover object-center z-10 rounded-lg">
+
+
+            <!-- <img src="{{user!.profilePicture}}" alt="club image"
+                class="rounded-full outline-8 outline-primary mx-auto z-50 -mt-28 w-48 h-48 object-cover object-center"> -->
+
+
+
+            <div class="w-11/12 mx-auto my-8">
+                <h1 class="text-3xl  font-semibold text-gray-800  lg:text-4xl">
+                    {{event!.name}}
+                </h1>
+                <span
+                    class="inline-block  bg-gradient-to-r from-emerald-500 to-emerald-900 text-white px-3 py-1 rounded-full  font-semibold mt-2">
+                    Event
+                </span>
+
+                <p class="mt-6  text-gray-500 ">
+                    {{event!.description}}
+                </p>
+            
+                <button *ngIf="!amIAttending"
+                    (click)="attendEvent(event!.id)"
+                    class="flex items-center mt-8 border-2 border-primary text-primary hover:bg-primary hover:text-white  px-3 py-1 rounded-full  font-semibold">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-calendar-check-fill mx-2" viewBox="0 0 16 16">
+                        <path
+                            d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                    </svg>
+                    Attend
+                </button>
+                
+                <div *ngIf="amIAttending" class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="w-10 h-10 bi bi-check-all fill-green-500" viewBox="0 0 16 16">
+                        <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486z"/>
+                      </svg>
+                    <span class="ml-2 text-green-500">You are attending this event</span>
+                </div>
+
+
+
+                <div class="relative mt-8 flex items-center gap-x-4">
+                    <img src="{{event.club.logo}}" alt="" class="h-10 w-10 rounded-full bg-gray-100">
+                    <div class="text-sm leading-6">
+                        <p class="font-semibold text-gray-900">
+                            <a href="#">
+                                <span class="absolute inset-0"></span>
+                                {{event.club.name}}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flow-root">
+                    <ul role="list" class="space-y-6 mt-8 ">
+                        <li class="relative flex gap-x-4">
+                            <div class="absolute left-0 top-0 flex w-6 justify-center -bottom-6">
+                                <div class="w-px bg-gray-200"></div>
+                            </div>
+                            <div class="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+                                <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
+                            </div>
+                            <p class="flex-auto py-0.5  leading-5 text-gray-500"><span
+                                    class="font-medium text-gray-900">Start Date</span> {{event!.start_date}}</p>
+                            <time datetime="2023-01-23T10:32"
+                                class="flex-none py-0.5  leading-5 text-gray-500">{{event!.start_time}}</time>
+                        </li>
+                        <li class="relative flex gap-x-4">
+                            <div class="absolute left-0 top-0 flex w-6 justify-center -bottom-6">
+                                <div class="w-px bg-gray-200"></div>
+                            </div>
+                            <div class="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+                                <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
+                            </div>
+                            <p class="flex-auto py-0.5  leading-5 text-gray-500"><span
+                                    class="font-medium text-gray-900">End Date</span> {{event!.end_date}}</p>
+                            <time datetime="2023-01-23T11:03"
+                                class="flex-none py-0.5  leading-5 text-gray-500">{{event!.end_time}}</time>
+                        </li>
+                    </ul>
+                </div>
+
+                <span
+                    class="inline-block mt-8 bg-gradient-to-r text-white from-blue-800 to-indigo-900 px-3 py-1 rounded-full  font-semibold">
+                    Number of places: {{event!.number_places}}
+                </span>
+                <span class="text-gray-500"> ( Available places: {{event!.number_places - event!.attendees}} )</span>
+
+                <div class="grid grid-cols-12">
+
+                    <div class="flex items-center justify-center p-8"
+                        *ngFor="let item of [].constructor(event!.number_places); let i = index">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            class="w-10 h-10 fill-gray-500 bi bi-person-workspace" 
+                            [ngClass]="{'fill-green-500': i < event!.attendees}"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                            <path
+                                d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z" />
+                        </svg>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+        </main>
+    </div>
+</div>

@@ -16,10 +16,15 @@ public class UserClub {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "club_id")
     private Club club;
+
+
+    private String status;
 
 
     private Date date;

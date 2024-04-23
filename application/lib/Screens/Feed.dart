@@ -90,45 +90,7 @@ class _FeedState extends State<Feed> {
                 )
               : SizedBox(height: 0.0, width: 0.0),
           SizedBox(height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.thumbsUp,
-                      size: 15.0, color: Colors.blue),
-                  SizedBox(width: 5.0),
-                  Text('8'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Text('20 comments  •  '),
-                ],
-              ),
-            ],
-          ),
           Divider(height: 30.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.thumbsUp, size: 20.0),
-                  SizedBox(width: 5.0),
-                  Text('Like', style: TextStyle(fontSize: 14.0)),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.commentAlt, size: 20.0),
-                  SizedBox(width: 5.0),
-                  Text('Comment', style: TextStyle(fontSize: 14.0)),
-                ],
-              ),
-            ],
-          )
         ],
       ),
     );

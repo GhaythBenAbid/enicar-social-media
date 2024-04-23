@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user-club")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class UserClubController {
 
     @Autowired
@@ -54,10 +55,20 @@ public class UserClubController {
     public ResponseEntity<List<UserClub>> getALLUserClubDetails(){
         return  new ResponseEntity<>(this.userClubService.getALLUserClubInfo(),HttpStatus.OK) ;}
 
+    @GetMapping("/user/{userClubID}")
+    public ResponseEntity<List<UserClub>> getUserClubByUserID(@PathVariable("userClubID") int userClubID){
+        return new ResponseEntity<>(this.userClubService.getUserClubByUserID(userClubID),HttpStatus.OK);
+    }
+
     @DeleteMapping ("/{userClubID}")
     public ResponseEntity<String> deleteUserClubDetails(@PathVariable("userClubID") int userClubID){
         this.userClubService.DeleteUserClubInfo(userClubID);
         return new ResponseEntity<>("UserClub Deleted Successfully", HttpStatus.NO_CONTENT);
     }
-    // Your controller logic goes here
+
+    //findUserClubsByUser_IdAndClub_Id
+    @GetMapping("/{userID}/{clubID}")
+    public ResponseEntity<List<UserClub>> getUserClubByUserIdAndClubId(@PathVariable("userID") long userID, @PathVariable("clubID") long clubID){
+        return new ResponseEntity<>(this.userClubService.getUserClubByUserIdAndClubId(userID, clubID),HttpStatus.OK);
+    }
 }

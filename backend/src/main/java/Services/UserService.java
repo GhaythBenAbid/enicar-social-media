@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
         existingUser.setPassword(user.getPassword());
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
-        existingUser.setVerified(user.isVerified());
+
 
         return userRepo.save(existingUser) ;
     }

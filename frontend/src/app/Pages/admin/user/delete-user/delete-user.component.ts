@@ -26,7 +26,10 @@ export class DeleteUserComponent {
       this.toast.success({detail : 'Success' , summary: 'User Deleted' , duration: 2000});
       this.close();
       this.deleteUserSuccess.emit();
-    });
+    }, (err: any) => {
+      this.toast.error({detail : 'Error' , summary: 'You cannot delete this user !' , duration: 2000});
+
+    }); 
   }
 
 

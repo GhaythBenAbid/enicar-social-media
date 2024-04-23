@@ -1,10 +1,14 @@
 package Services;
 
 
+import Dto.PostDto;
+import Dto.ReactionDto;
 import Models.Event;
 import Models.Post;
+import Models.Reaction;
 import Models.User;
 import Repositories.PostRepository;
+import Repositories.ReactionRepository;
 import Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,10 +34,14 @@ public class PostService {
 
     private final PostRepository postRepo;
     private final UserRepository userRepo;
+
+    private final ReactionRepository reactionRepository;
+
     @Autowired
-    public PostService(PostRepository postRepo, UserRepository userRepo) {
+    public PostService(PostRepository postRepo, UserRepository userRepo , ReactionRepository reactionRepository){
         this.postRepo = postRepo;
         this.userRepo = userRepo;
+        this.reactionRepository = reactionRepository;
     }
 
     @Autowired
@@ -62,8 +70,52 @@ public class PostService {
 
     }
 
-    public List<Post> getALLPostInfo() {return postRepo.findAllByOrderByDateDesc();}
+    public List<Post> getALLPostInfo() {
+
+        return postRepo.findAll();
+
+    }
     public Optional<Post> getPostInfo(long postID) {return postRepo.findById(postID);}
+
+
+    public List<PostDto> getAllPosts(){
+        List<Post> posts = postRepo.findAll();
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts){
+            PostDto postDto = new PostDto();
+            postDto.setId(post.getId());
+            postDto.setContent(post.getContent());
+            postDto.setAuthor(post.getAuthor());
+            postDto.setImage(post.getImage());
+            postDto.setDate(post.getDate());
+            postDto.setTags(post.getTags());
+            postDto.setVisibility(post.isVisibility());
+
+
+            List<Reaction> reactions = reactionRepository.getReactionsByPost_Id(post.getId());
+            List<ReactionDto> reactionDtos = new ArrayList<>();
+            for(Reaction reaction : reactions){
+                ReactionDto reactionDto = new ReactionDto();
+                reactionDto.setId(reaction.getId());
+                reactionDto.setUser(reaction.getUser());
+                reactionDto.setComment(reaction.getComment());
+                reactionDto.setType(reaction.getType());
+                reactionDto.setDate(reaction.getDate());
+                reactionDtos.add(reactionDto);
+            }
+
+            postDto.setReactions(reactionDtos);
+
+
+            postDtos.add(postDto);
+
+        }
+        return postDtos;
+    }
+
+
+
+
 
 
 

@@ -20,22 +20,25 @@ import { MyAccountComponent } from './Pages/my-account/my-account.component';
 import { EventsComponent } from './Pages/events/events.component';
 import { EditClubComponent } from './Pages/admin/club/edit-club/edit-club.component';
 import { AddEventComponent } from './Pages/add-event/add-event.component';
+import { LogoutComponent } from './Pages/logout/logout.component';
+import { EventDetailsComponent } from './Pages/event-details/event-details.component';
 
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
-  // { path: 'feed', component: HomepageComponent , canActivate: [AuthGuard]},
-  { path: 'feed', component: HomepageComponent},
-  { path: 'clubs', component: ClubsComponent },
-  { path: 'club/:id', component: ClubDetailsComponent },
-  { path: 'club/:id/event/add', component: AddEventComponent },
-  { path: 'register', component: RegisterComponent},
+  { path: 'logout', component: LogoutComponent },
+  { path: 'feed', component: HomepageComponent , canActivate: [AuthGuard] },
+  { path: 'clubs', component: ClubsComponent , canActivate: [AuthGuard] },
+  { path: 'club/:id', component: ClubDetailsComponent , canActivate: [AuthGuard] },
+  { path: 'club/:id/event/add', component: AddEventComponent , canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent  },
   { path: 'verify/:token', component: VerifcationComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'myaccount', component: MyAccountComponent },
-  { path: 'events', component: EventsComponent },
+  { path: 'calendar', component: CalendarComponent , canActivate: [AuthGuard] },
+  { path: 'myaccount', component: MyAccountComponent , canActivate: [AuthGuard] },
+  { path: 'events', component: EventsComponent , canActivate: [AuthGuard] },
+  { path: 'event/:id', component:  EventDetailsComponent , canActivate: [AuthGuard] },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'settings', component: SettingsComponent },
 

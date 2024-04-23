@@ -1,36 +1,37 @@
 <div>
-    <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
 
-    <div class="lg:pl-72">
+  <div class="lg:pl-72">
 
-        <!-- Global notification live region, render this permanently at the end of the document -->
-
-
-        <main class="bg-gray-100">
-            <img src="{{user!.coverPicture}}" alt="user image" class="w-full h-96 object-cover object-center z-10 rounded-lg">
+    <!-- Global notification live region, render this permanently at the end of the document -->
 
 
-            <img src="{{user!.profilePicture}}" alt="club image"
-                class="rounded-full outline-8 outline-primary mx-auto z-50 -mt-28 w-48 h-48 object-cover object-center">
+    <main class="bg-gray-100">
+      <img
+        src="{{user!.coverPicture ? user!.coverPicture : 'https://scontent.ftun10-1.fna.fbcdn.net/v/t39.30808-6/214655522_2059005034237942_8200680362427823660_n.png?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=SozObXrZoUwQ7kNvgEfnRwS&_nc_ht=scontent.ftun10-1.fna&oh=00_AfA2_s2kTqI5Nc7ULJdnp4W3jX2D4lCDNBmH839H7nPPew&oe=662D711E'}}"
+        alt="user image" class="w-full h-96 object-cover object-center z-10 rounded-lg">
+
+
+      <img src="{{user!.profilePicture}}" alt="club image"
+        class="rounded-full outline-8 outline-primary mx-auto z-50 -mt-28 w-48 h-48 object-cover object-center">
 
 
 
+      <div class="max-w-lg mx-auto my-8 text-center">
+        <h1 class="text-3xl text-center font-semibold text-gray-800  lg:text-4xl">
+          {{user!.firstName}} {{user!.lastName}}
+        </h1>
+        <span
+          class="inline-block  bg-gradient-to-r from-indigo-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold mt-2">
+          Member
+        </span>
 
-            <div class="max-w-lg mx-auto my-8 text-center">
-                <h1 class="text-3xl text-center font-semibold text-gray-800  lg:text-4xl">
-                    {{user!.firstName}} {{user!.lastName}}
-                </h1>
-                <span
-                    class="inline-block  bg-gradient-to-r from-indigo-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold mt-2">
-                    Member
-                </span>
-
-                <p class="mt-6 text-center text-gray-500 ">
-                    {{user!.aboutMe}}
-                </p>
+        <p class="mt-6 text-center text-gray-500 ">
+          {{user!.aboutMe}}
+        </p>
 
 
-                <!-- <div class="my-8 ">
+        <!-- <div class="my-8 ">
                     <div class="-my-2 flex justify-center">
                       <a href="#" class="flex gap-x-4 hover:text-primary group mx-5  text-sm font-semibold leading-6 text-gray-900">
                         <svg class="h-6 w-6 flex-none text-gray-400 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -60,98 +61,64 @@
                     </div>
                   </div> -->
 
-                <!-- <button class="mt-2 bg-primary text-white px-4 py-2 rounded-lg">
+        <!-- <button class="mt-2 bg-primary text-white px-4 py-2 rounded-lg">
                     Request to join
                 </button> -->
 
 
-                
-                
+
+
+      </div>
+
+      <hr class="max-w-6xl mx-auto h-1">
+
+
+
+
+
+      <!-- event list -->
+      <div id="events" class="max-w-6xl mx-auto relative flex flex-col justify-center overflow-hidden py-4">
+        <div *ngIf="events.length != 0" class="mx-auto max-w-screen-xl px-4 w-full">
+          <h2 class="mb-4 font-bold text-2xl">
+            {{user!.firstName}} {{user!.lastName}} attend these events
+          </h2>
+          <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+            <div *ngFor="let data of events"
+              class="relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-sm">
+
+              <a [routerLink]="['/event' , data.event.id]" class="z-20 absolute h-full w-full top-0 left-0 ">&nbsp;</a>
+              <div class="h-auto overflow-hidden">
+                <div class="h-44 overflow-hidden relative">
+                  <img src="{{data.event!.banner}}" alt="">
+                </div>
+              </div>
+              <div class="bg-white py-4 px-3">
+                <h3 class="text-xs mb-2 font-medium">{{data.event!.name}}</h3>
+                <div class="flex justify-between items-center">
+                  <p class="text-xs text-gray-400">
+                    {{data.event!.description}}
+                  </p>
+
+                </div>
+              </div>
             </div>
-            
-            <hr class="max-w-6xl mx-auto h-1">
 
-            
-                
-                
 
-            <!-- event list -->
-            <div id="events" class="max-w-6xl mx-auto relative flex min-h-screen flex-col justify-center overflow-hidden py-4">
-                <div class="mx-auto max-w-screen-xl px-4 w-full">
-                  <h2 class="mb-4 font-bold text-2xl">
-                    Our events
-                  </h2>
-                  <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
-              
-                    <div 
-                    *ngFor="let event of [1,2,3,4,5,6,7,8]"
-                    class="relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-sm">
-                      
-                      <a href="" class="z-20 absolute h-full w-full top-0 left-0 ">&nbsp;</a>
-                      <div class="h-auto overflow-hidden">
-                        <div class="h-44 overflow-hidden relative">
-                          <img src="https://picsum.photos/400/400" alt="">
-                        </div>
-                      </div>
-                      <div class="bg-white py-4 px-3">
-                        <h3 class="text-xs mb-2 font-medium">Des cadeaux incroyables prêts à être utilisés dans votre prochain projet</h3>
-                        <div class="flex justify-between items-center">
-                          <p class="text-xs text-gray-400">
-                          Lorem, ipsum dolor sit amet
-                        </p>
-                        
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                    
-                    
-                  </div>
-                </div>
-              </div>
-            <div id="members" class="max-w-6xl mx-auto relative flex min-h-screen flex-col justify-center overflow-hidden py-4">
-                <div class="mx-auto max-w-screen-xl px-4 w-full">
-                  <h2 class="mb-4 font-bold text-2xl">
-                    Our Members
-                  </h2>
-                  <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
-              
-                    <div 
-                    *ngFor="let event of [1,2,3,4,5,6,7,8]"
-                    class="relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-sm">
-                      
-                      <a href="" class="z-20 absolute h-full w-full top-0 left-0 ">&nbsp;</a>
-                      <div class="h-auto overflow-hidden">
-                        <div class="h-44 overflow-hidden relative">
-                          <img src="https://picsum.photos/400/400" alt="">
-                        </div>
-                      </div>
-                      <div class="bg-white py-4 px-3">
-                        <h3 class="text-xs mb-2 font-medium">Des cadeaux incroyables prêts à être utilisés dans votre prochain projet</h3>
-                        <div class="flex justify-between items-center">
-                          <p class="text-xs text-gray-400">
-                          Lorem, ipsum dolor sit amet
-                        </p>
-                        
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                    
-                    
-                  </div>
-                </div>
-              </div>
+
+
+          </div>
+        </div>
+      </div>
+      
 
 
 
 
 
 
-            
 
-        </main>
-    </div>
+
+    </main>
+  </div>
 </div>

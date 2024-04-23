@@ -4,7 +4,9 @@ import { NgToastService } from 'ng-angular-popup';
 import { Post } from 'src/app/Models/Post';
 import { User } from 'src/app/Models/User';
 import { PostService } from 'src/app/Services/post.service';
+import { ReactionService } from 'src/app/Services/reaction.service';
 import { Tags } from 'src/app/Utils/Tags';
+import {cuss} from 'cuss/ar-latn';
 
 @Component({
   selector: 'app-homepage',
@@ -15,19 +17,23 @@ export class HomepageComponent {
   visible: boolean = false;
   tags = Tags.tags;
   loading: boolean = false;
-  posts: Post[] = [];
-  user : User;
+  posts: any[] = [];
+  user: User;
 
   image: File | undefined;
   imagePreview: string | undefined;
   content: string = "";
 
-  constructor(private postService: PostService , private toast: NgToastService) {
+  constructor(private postService: PostService, private toast: NgToastService, private reactionService: ReactionService) {
     this.user = JSON.parse(localStorage.getItem('currentUser')!);
+
+
+
   }
 
   ngOnInit() {
     this.getAllPosts();
+
   }
 
   onFileChange(event: any) {
@@ -46,6 +52,19 @@ export class HomepageComponent {
   getAllPosts() {
     this.postService.getAllPosts().subscribe((res: any) => {
       this.posts = res as Post[];
+      for (let post of this.posts) {
+        post.isLiked = false;
+        post.numberOfComments = 0;
+        for (let reaction of post.reactions) {
+          if (reaction.user.id == this.user.id) {
+            post.isLiked = true;
+          }
+          if(reaction.comment != ""){
+            post.numberOfComments += 1;
+          }
+        }
+      }
+      console.log(this.posts);
     });
   }
 
@@ -54,6 +73,12 @@ export class HomepageComponent {
   addPost() {
     this.loading = true;
     const currentUser: User | null = JSON.parse(localStorage.getItem('currentUser')!);
+
+    if (this.checkForProfanity(this.content)) {
+      this.toast.error({ detail: "PROFANITY", summary: 'Profanity Detected!', duration: 1000 });
+      this.loading = false;
+      return;
+    }
 
     const post = {
       content: this.content,
@@ -77,14 +102,65 @@ export class HomepageComponent {
 
     this.postService.createPost(formData).subscribe((res: any) => {
       this.getAllPosts();
-      this.toast.success({detail:"SUCCESS",summary:'Post Created Successfully!',duration:1000});
+      this.toast.success({ detail: "SUCCESS", summary: 'Post Created Successfully!', duration: 1000 });
       this.visible = false;
       this.loading = false;
-      
-    });
 
+    });
+  }
+
+  reactPost(id: any, type: any) {
+    if (type) {
+      const reaction = {
+        post: {
+          id: id
+        },
+        user: {
+          id: this.user.id
+        },
+        type: "LIKE",
+        comment: "",
+        date: new Date()
+      }
+
+      this.reactionService.createReaction(reaction).subscribe((res: any) => {
+        this.getAllPosts();
+      });
+    } else {
+      for (let post of this.posts) {
+        if (post.id == id) {
+          for (let reaction of post.reactions) {
+            if (reaction.user.id == this.user.id) {
+              this.reactionService.deleteReaction(reaction.id).subscribe((res: any) => {
+                this.getAllPosts();
+              });
+            }
+          }
+        }
+      }
+
+
+
+    }
 
   }
+
+  checkForProfanity(text: string): boolean {
+    // Convert the text to lowercase for case-insensitive matching
+    const lowercaseText = text.toLowerCase();
+  
+    // Iterate over the keys in the cuss object to check for profanity
+    for (const word in cuss) {
+      if (lowercaseText.includes(word)) {
+        return true; // Profanity found
+      }
+    }
+  
+    return false; // No profanity found
+  }
+
+
+
 
 
 

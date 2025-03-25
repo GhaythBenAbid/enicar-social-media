@@ -4,6 +4,7 @@ import { Club } from 'src/app/Models/Club';
 import { User } from 'src/app/Models/User';
 import { UserService } from 'src/app/Services/user.service';
 import { ClubService } from 'src/app/services/club.service';
+import { Post } from 'src/app/Models/Post';
 
 @Component({
   selector: 'app-my-account',
@@ -14,6 +15,7 @@ export class MyAccountComponent {
 
   id: string = '';
   user : User | undefined;
+  posts: Post[] = [];
 
   constructor(private route: ActivatedRoute , private userService : UserService) { }
 
